@@ -45,8 +45,7 @@ nav a:hover{color:var(--green)}
 .hero .h1a,.hero .h1b{font-family:'Anton',sans-serif;font-size:clamp(72px,13vw,190px);line-height:0.79;letter-spacing:-0.045em;text-transform:uppercase}
 .hero .h1a{color:var(--bone)}
 .hero .h1b{color:var(--green);text-shadow:0 0 70px rgba(57,255,20,0.45)}
-.hero-sub{display:flex;align-items:flex-end;gap:26px;flex-wrap:wrap}
-.hero-sub p{font-size:18px;line-height:1.5;color:var(--body);max-width:280px;padding-bottom:26px;margin:0;text-wrap:pretty}
+.hero-blurb{font-size:18px;line-height:1.6;color:var(--body);max-width:480px;margin:36px 0 0;text-wrap:pretty}
 .hero-ctas{display:flex;gap:14px;margin:38px 0 60px;flex-wrap:wrap}
 .hero-photo{position:relative;height:560px;border:1px solid #1E2024}
 .hero-photo img{width:100%;height:100%;object-fit:cover}
