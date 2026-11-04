@@ -31,14 +31,14 @@ nav{display:flex;gap:28px;align-items:center}
 .handle{color:var(--mid)}
 
 main{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1fr minmax(300px,30vw);min-height:0}
-.col-left{display:flex;flex-direction:column;justify-content:space-between;gap:16px;padding:26px 40px 14px;min-width:0}
+.col-left{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:22px 40px 12px;min-width:0}
 .kicker{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .kicker .dot{width:8px;height:8px;background:var(--pink);border-radius:50%;box-shadow:0 0 12px 3px rgba(255,47,185,0.8)}
 .kicker span:last-child{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.28em;color:var(--pink);text-transform:uppercase}
 h1{margin:0;font-weight:400;font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:-0.035em;font-size:clamp(54px,7.2vw,104px);line-height:.92}
 .h1a{color:var(--bone)}
 .h1b{color:var(--green);text-shadow:0 0 60px rgba(57,255,20,0.45)}
-.blurb{font-size:15px;line-height:1.5;color:var(--body);max-width:520px;margin:14px 0 0}
+.blurb{font-size:14px;line-height:1.5;color:var(--body);max-width:560px;margin:12px 0 0}
 .ctas{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
 
 .shows-mini{border-top:1px solid var(--line)}
@@ -51,7 +51,7 @@ h1{margin:0;font-weight:400;font-family:'Anton',sans-serif;text-transform:upperc
 .chipb-solid{background:var(--green);color:var(--black);border-color:var(--green)}
 
 .thumbs{display:flex;gap:8px;min-height:0;align-items:stretch}
-.thumbs img{height:108px;width:auto;border:1px solid #1E2024;min-width:0;object-fit:contain}
+.thumbs img{height:clamp(120px,19vh,200px);width:auto;border:1px solid #1E2024;min-width:0;object-fit:contain}
 
 .bottombar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:12px;border-top:1px solid var(--line);flex-wrap:wrap}
 .socials{display:flex;gap:20px}
@@ -81,6 +81,6 @@ h1{margin:0;font-weight:400;font-family:'Anton',sans-serif;text-transform:upperc
   .srow{grid-template-columns:70px 1fr 90px;gap:10px}
   .sloc{display:none}
   .thumbs{overflow-x:auto}
-  .thumbs img{height:90px;flex:none}
+  .thumbs img{height:110px;flex:none}
   .bottombar{justify-content:center}
 }
