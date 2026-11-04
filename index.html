@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=5">
+<link rel="stylesheet" href="assets/styles.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,7 +40,9 @@
     <span>Holly Weed</span>
   </a>
   <nav>
-    <button id="bio-open" class="navlink">Bio</button>
+    <a class="navlink" href="about.html">About</a>
+    <a class="navlink" href="photos.html">Photos</a>
+    <a class="navlink" href="shows.html">Shows</a>
     <a class="navlink" href="assets/DJHollyWeed-EPK.pdf" download>Press Kit</a>
     <a class="navlink" href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">Mixes</a>
   </nav>
@@ -64,39 +66,38 @@
     </div>
 
     <div class="shows-mini">
-      <div class="srow">
+      <a class="srow" href="shows.html">
         <span class="tag tag-pink">Next Up</span>
         <span class="sname">Pachi Pachi — Opening Set</span>
         <span class="sloc">Nov 13 · Downtown Las Vegas</span>
         <span class="chipb chipb-solid">Confirmed</span>
-      </div>
-      <div class="srow">
+      </a>
+      <a class="srow" href="shows.html">
         <span class="tag tag-pink">Next Up</span>
         <span class="sname">Dystopia</span>
         <span class="sloc">Jan 16 2027 · Regal Rooms, Austin TX · Dragonwolf</span>
         <span class="chipb chipb-solid">Confirmed</span>
-      </div>
-      <div class="srow">
+      </a>
+      <a class="srow" href="shows.html">
         <span class="tag">Played</span>
         <span class="sname">Southwest Flow Festival</span>
         <span class="sloc">2026 · Three one-hour sets</span>
         <span class="chipb">Played</span>
-      </div>
-      <div class="srow">
+      </a>
+      <a class="srow" href="shows.html">
         <span class="tag">Played</span>
         <span class="sname">Burning Man — Camp VIP</span>
         <span class="sloc">2026 · Very Inappropriate People · build + tear down sets</span>
         <span class="chipb">Done</span>
-      </div>
+      </a>
     </div>
 
     <div class="thumbs">
-      <img src="assets/img/gal-2.jpg" alt="Live set">
-      <img src="assets/img/gal-3.jpg" alt="Behind the booth">
-      <img src="assets/img/gal-4.jpg" alt="Neon booth">
-      <img src="assets/img/about-2.jpg" alt="At the decks">
-      <img src="assets/img/gal-6.jpg" alt="Festival">
-      <img src="assets/img/gal-1.jpg" alt="Decks wide">
+      <a href="photos.html"><img src="assets/img/live-01.jpg" alt="Southwest Flow Festival — on the decks"></a>
+      <a href="photos.html"><img src="assets/img/live-04.jpg" alt="Southwest Flow Festival"></a>
+      <a href="photos.html"><img src="assets/img/live-05.jpg" alt="Southwest Flow Festival"></a>
+      <a href="photos.html"><img src="assets/img/live-09.jpg" alt="Behind the decks"></a>
+      <a class="thumb-more" href="photos.html"><span>All<br>Photos</span><span class="arr">→</span></a>
     </div>
 
     <div class="bottombar">
@@ -118,23 +119,8 @@
 
 </div>
 
-<div id="bio-modal" hidden>
-  <div class="modal-card">
-    <button id="bio-close" aria-label="Close">✕</button>
-    <div class="eyebrow">Short Bio</div>
-    <p>DJ Holly Weed is a Las Vegas DJ and professional circus performer. Any kind of music, any time — remixes of rap, riddim, drum and bass, techno, hardstyle, chillstep, EDM, rock, alt and more. After years performing for thousands at MGM Grand, EDC's main stage and AREA15, she brought the show to the decks — three separate one-hour sets at Southwest Flow Festival and sets during build and tear down with Camp VIP at Burning Man. A performance, not just a set.</p>
-    <div class="eyebrow" style="margin-top:22px">Long Bio</div>
-    <p>DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She booked Burning Man before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival and sets during build and tear down with Camp VIP (Very Inappropriate People) at Burning Man 2026. Her sets run any kind of music, any time — remixes of rap, riddim, drum and bass, techno, hardstyle, chillstep, EDM, rock, alt — with circus surprises built in. Up next: opening Pachi Pachi in downtown Las Vegas (November 13) and Dystopia in Austin with Dragonwolf Productions (January 16, 2027). Anything you can do, she can do higher.</p>
-  </div>
-</div>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-  var m = document.getElementById('bio-modal');
-  document.getElementById('bio-open').addEventListener('click', function(){ m.hidden = false; });
-  document.getElementById('bio-close').addEventListener('click', function(){ m.hidden = true; });
-  m.addEventListener('click', function(e){ if(e.target === m) m.hidden = true; });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') m.hidden = true; });
 </script>
 </body>
 </html>
