@@ -95,15 +95,15 @@ p.lede{color:var(--body);font-size:clamp(15.5px,1.4vw,18px);line-height:1.75;max
 
 /* about — full-bleed background photo, copy clear of her */
 .about-sec{max-width:none;padding:0}
-.about-stage{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-.about-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_2000/f_auto/q_auto/djhollyweed/about-wide');background-size:cover;background-position:70% center;transform:scale(1.08);will-change:transform}
+.about-stage{position:relative;height:max(min(100svh,56.25vw),540px);display:flex;align-items:center;overflow:hidden}
+.about-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_2000/f_auto/q_auto/djhollyweed/about-wide');background-size:cover;background-position:right 45%;transform:scale(1.04);transform-origin:right center;will-change:transform}
 .about-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.94) 0%,rgba(5,5,5,.74) 32%,rgba(5,5,5,.3) 50%,transparent 64%)}
-.about-copy{position:relative;z-index:2;max-width:640px;padding:clamp(90px,14vh,150px) clamp(18px,5vw,64px)}
+.about-copy{position:relative;z-index:2;max-width:560px;padding:40px clamp(18px,5vw,64px)}
 .factline{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .factchip{border:1px solid var(--border);border-radius:999px;padding:9px 16px;font-size:12.5px;color:var(--body);background:rgba(5,5,5,.5)}
 .factchip b{color:var(--bone);font-weight:600}
-@media(max-width:900px){
-  .about-stage{display:block;min-height:0}
+@media(max-width:1024px){
+  .about-stage{display:block;height:auto}
   .about-bg{position:relative;inset:auto;aspect-ratio:2/3;transform:none;background-image:url('assets/img/hero-smoke.jpg');background-position:center}
   .about-scrim{display:none}
   .about-copy{max-width:none;padding:46px 18px 90px}
@@ -168,7 +168,7 @@ p.lede{color:var(--body);font-size:clamp(15.5px,1.4vw,18px);line-height:1.75;max
 .book-grid textarea{min-height:120px;resize:vertical}
 .direct{margin-top:18px;color:var(--mid);font-size:13.5px;line-height:1.7}
 .direct a{color:var(--green)}
-.chibi{width:132px;border-radius:22px;border:1px solid rgba(57,255,20,.3);box-shadow:0 0 34px rgba(57,255,20,.25);margin-top:26px;animation:bob 3.4s ease-in-out infinite}
+.chibi{width:min(100%,420px);border-radius:26px;border:1px solid rgba(57,255,20,.3);box-shadow:0 0 50px rgba(57,255,20,.3);margin-top:30px;animation:bob 3.4s ease-in-out infinite}
 @media(max-width:900px){.book-grid{grid-template-columns:1fr}}
 
 /* footer */
@@ -545,8 +545,8 @@ document.querySelectorAll('h2 .line > span').forEach(function(el){
     scrollTrigger: { trigger: el, start: 'top 88%' } });
 });
 /* about background: slow parallax drift (desktop layout only) */
-if (innerWidth > 900) {
-  gsap.fromTo('.about-bg', { yPercent: -5, scale: 1.12 }, { yPercent: 5, scale: 1.12, ease: 'none',
+if (innerWidth > 1024) {
+  gsap.fromTo('.about-bg', { yPercent: -2.5, scale: 1.06 }, { yPercent: 2.5, scale: 1.06, ease: 'none',
     scrollTrigger: { trigger: '.about-stage', start: 'top bottom', end: 'bottom top', scrub: true } });
 }
 
