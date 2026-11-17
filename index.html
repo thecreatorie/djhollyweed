@@ -1,316 +1,599 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>DJ Holly Weed — Las Vegas · Any Kind of Music, Any Time</title>
+<title>DJ Holly Weed — Las Vegas DJ × Stoned Circus</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="DJ Holly Weed. Las Vegas DJ and circus performer. Any kind of music, any time. Next: Dystopia, Austin TX 1/16/27. Bookings: ms.hollyweed@gmail.com">
-<meta property="og:title" content="DJ Holly Weed">
-<meta property="og:description" content="Anything you can do, I can do higher.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/hero-smoke.jpg">
+<meta name="description" content="DJ Holly Weed — Las Vegas DJ and circus performer. Any genre, any time. Booking: ms.hollyweed@gmail.com">
 <meta name="theme-color" content="#050505">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MusicGroup",
-  "name": "DJ Holly Weed",
-  "genre": ["Rap Remixes", "Riddim", "Drum and Bass", "Techno", "Hardstyle", "Chillstep", "EDM", "Rock", "Alternative"],
-  "foundingLocation": {"@type": "Place", "name": "Las Vegas, NV"},
-  "email": "ms.hollyweed@gmail.com",
-  "sameAs": ["https://www.instagram.com/djhollyweed","https://soundcloud.com/djhollyweed","https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe"]
-}
-</script>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   DJ HOLLY WEED — animated scroll site
+   Motion: Lenis smooth scroll + GSAP ScrollTrigger + fx canvas.
+   EDIT COPY / GIGS / LINKS in the marked HTML blocks below.
+   All timings live in the CONFIG object at the top of the script.
+   ============================================================ */
 :root{
-  --green:#39FF14; --pink:#FF2FB9; --black:#050505; --bone:#E8EAF0;
+  --green:#39FF14; --pink:#FF2FB9; --ink:#050505; --bone:#E8EAF0;
   --panel:#0A0B0C; --line:#1A1C1F; --border:#2A2D32; --mid:#8A8F98; --body:#9AA0A8;
+  --slick:linear-gradient(90deg,#FF2FB9,#7A5CFF,#00D8FF,#00FF9D,#39FF14,#FFB300);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-html,body{margin:0;background:var(--black);color:#fff;font-family:'Archivo',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--ink);color:var(--bone)}
+body{font-family:'Archivo',sans-serif;overflow-x:clip}
+html{overflow-x:clip}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+::selection{background:var(--green);color:#050505}
+h1,h2,.sdate,.bigword{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:.035em;text-transform:uppercase}
+.label{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.32em;text-transform:uppercase}
 a{color:inherit;text-decoration:none}
-img{display:block}
-.label{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;font-size:11px}
-.dim{color:var(--mid)}
-@keyframes slick{from{background-position:0% 50%}to{background-position:200% 50%}}
-.slick{background:linear-gradient(105deg,#FF2FB9,#7A5CFF,#00D8FF,#00FF9D,#39FF14,#FFB300,#FF2FB9);background-size:200% 100%;animation:slick 9s linear infinite;color:var(--black)!important}
-.btn{display:inline-block;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:14px 26px;border-radius:999px;transition:filter .2s}
-.btn:hover{filter:brightness(1.15)}
-.btn-outline{border:1px solid var(--border);color:#fff;border-radius:999px}
-.btn-outline:hover{border-color:var(--green);color:var(--green);filter:none}
+img,video{display:block;max-width:100%}
+.hl{color:var(--green)} .pk{color:var(--pink)}
 
-/* ---------- fixed nav ---------- */
-header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 40px;background:rgba(5,5,5,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,45,50,.5)}
-.logo{display:flex;align-items:center;gap:11px}
-.logo svg{color:var(--green);flex:none;filter:drop-shadow(0 0 6px rgba(57,255,20,.8))}
-.logo span{font-family:'Anton',sans-serif;font-size:19px;letter-spacing:-0.02em;color:var(--bone);text-transform:uppercase}
-nav{display:flex;gap:26px;align-items:center}
-.navlink{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;color:var(--mid);text-transform:uppercase;transition:color .2s,text-shadow .2s}
-.navlink:hover{color:var(--green);text-shadow:0 0 12px rgba(57,255,20,.8)}
+/* fx layers */
+#fx{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ---------- atmosphere ---------- */
-.smoke{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.smoke i{position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);opacity:.22;animation:drift 22s ease-in-out infinite alternate}
-.smoke i.g{background:radial-gradient(circle,rgba(57,255,20,.8),transparent 60%)}
-.smoke i.p{background:radial-gradient(circle,rgba(255,47,185,.6),transparent 60%);animation-duration:28s;animation-delay:-9s}
-.smoke i.b{background:radial-gradient(circle,rgba(0,216,255,.35),transparent 60%);animation-duration:34s;animation-delay:-17s}
-@keyframes drift{from{transform:translate(-12%,6%) scale(1)}to{transform:translate(14%,-8%) scale(1.25)}}
-.beams{position:absolute;inset:0;overflow:hidden;pointer-events:none;mix-blend-mode:screen}
-.beams i{position:absolute;top:-20%;width:9vw;height:150%;background:linear-gradient(to bottom,rgba(57,255,20,.32),transparent 75%);filter:blur(14px);transform-origin:top center;animation:sway 7s ease-in-out infinite alternate}
-.beams i:nth-child(1){left:8%;animation-delay:0s}
-.beams i:nth-child(2){left:30%;background:linear-gradient(to bottom,rgba(255,47,185,.26),transparent 75%);animation-delay:-2.2s;animation-duration:8.5s}
-.beams i:nth-child(3){left:58%;animation-delay:-4s;animation-duration:6.2s}
-.beams i:nth-child(4){left:82%;background:linear-gradient(to bottom,rgba(0,216,255,.22),transparent 75%);animation-delay:-1.4s;animation-duration:9s}
-@keyframes sway{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
-.grain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,44px);background:rgba(5,5,5,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,45,50,.45)}
+nav .wordmark{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.08em}
+nav .wordmark b{color:var(--green);font-weight:400}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav ul a{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--body);transition:color .2s}
+nav ul a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;transition:.25s;cursor:pointer;border:0}
+.btn-slick{background:var(--slick);color:#050505;font-weight:800}
+.btn-slick:hover{filter:brightness(1.15);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--border);color:var(--bone);background:transparent}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+@media(max-width:860px){nav ul{display:none}}
 
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--black)}
-.hero .bg{position:absolute;inset:0;background:url('assets/img/hero-smoke.jpg') center 22%/cover no-repeat;opacity:.92}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(to right,rgba(5,5,5,.92) 0%,rgba(5,5,5,.55) 42%,rgba(5,5,5,.15) 70%,rgba(5,5,5,.55) 100%),linear-gradient(to top,rgba(5,5,5,1) 0%,transparent 38%),linear-gradient(to bottom,rgba(5,5,5,.8) 0%,transparent 22%)}
-.hero-inner{position:relative;z-index:2;padding:0 40px 9svh;max-width:980px}
-.script-logo{width:min(430px,72vw);filter:drop-shadow(0 0 34px rgba(57,255,20,.35));margin-left:-10px}
-.hero h1{margin:6px 0 0;font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.02em;font-size:clamp(44px,7vw,96px);line-height:.95;color:var(--bone);text-shadow:0 0 40px rgba(5,5,5,.9)}
-.hero h1 .hl{color:var(--green);text-shadow:0 0 18px rgba(57,255,20,.65),0 0 60px rgba(57,255,20,.4)}
-.hero .sub{margin:16px 0 0;max-width:520px;color:#C9CDD4;font-size:15px;line-height:1.6;text-shadow:0 1px 14px rgba(5,5,5,.9)}
-.hero .kicker{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.hero .kicker .dot{width:8px;height:8px;background:var(--pink);border-radius:50%;box-shadow:0 0 14px 4px rgba(255,47,185,.8)}
-.hero .kicker span:last-child{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.3em;color:var(--pink);text-transform:uppercase;text-shadow:0 0 12px rgba(255,47,185,.6)}
-.hero .ctas{display:flex;align-items:center;gap:18px;margin-top:26px}
-.circle-btn{width:58px;height:58px;border-radius:50%;border:1px solid rgba(232,234,240,.5);display:flex;align-items:center;justify-content:center;color:var(--bone);font-size:20px;transition:all .25s;background:rgba(5,5,5,.3);backdrop-filter:blur(4px)}
-.circle-btn:hover{border-color:var(--green);color:var(--green);box-shadow:0 0 24px rgba(57,255,20,.5);transform:translateY(4px)}
+/* ---------- HERO (sticky; sections scroll OVER it) ---------- */
+.hero{position:sticky;top:0;height:100svh;z-index:1;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start;text-align:left}
+.hero .vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.08) contrast(1.04)}
+.hero .tint{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(5,5,5,.68),rgba(5,5,5,.22) 44%,transparent 68%),
+  linear-gradient(rgba(5,5,5,.42),transparent 32%,rgba(5,5,5,.8));}
+.hero-inner{position:relative;z-index:2;max-width:880px;padding:0 clamp(18px,5vw,64px) clamp(76px,11vh,118px)}
+.hero .kicker{color:rgba(232,234,240,.8);margin-bottom:20px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.hero h1{font-size:clamp(60px,10vw,160px);line-height:.88;text-shadow:0 6px 60px rgba(0,0,0,.65)}
+.hero h1 .row2{display:block;color:var(--green);text-shadow:0 0 24px rgba(57,255,20,.55),0 0 90px rgba(57,255,20,.35)}
+.hero h1 .ch{display:inline-block;white-space:pre}
+.hero .sub{color:rgba(232,234,240,.85);font-size:clamp(17px,1.7vw,20px);max-width:48ch;margin:20px 0 28px;line-height:1.7;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.hero .ctas{display:flex;gap:16px;justify-content:flex-start;flex-wrap:wrap}
+.hud{position:absolute;bottom:30px;right:34px;z-index:2;width:74px;height:74px}
+@media(max-width:860px){.hud{display:none}}
+.hud svg{position:absolute;inset:0;overflow:visible}
+.hud .r1{animation:spin 14s linear infinite;transform-origin:center}
+.hud .r2{animation:spinb 9s linear infinite;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinb{to{transform:rotate(-360deg)}}
+.hud .arrow{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:20px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
 
-/* ---------- sections ---------- */
-section{position:relative}
-.eyebrow{display:flex;align-items:center;gap:14px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);text-shadow:0 0 10px rgba(57,255,20,.5)}
-.eyebrow::after{content:"";height:1px;width:72px;background:linear-gradient(to right,var(--green),transparent)}
-h2{margin:14px 0 0;font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.015em;font-size:clamp(38px,5.6vw,78px);line-height:.98;color:var(--bone)}
-h2 .hl{color:var(--green);text-shadow:0 0 16px rgba(57,255,20,.55)}
-h2 .pk{color:var(--pink);text-shadow:0 0 16px rgba(255,47,185,.55)}
+/* content above hero */
+.over{position:relative;z-index:5;background:var(--ink);border-top:1px solid rgba(57,255,20,.18);box-shadow:0 -40px 90px rgba(0,0,0,.65);border-radius:26px 26px 0 0}
+section{position:relative;padding:clamp(90px,13vh,150px) clamp(18px,5vw,64px);max-width:1280px;margin:0 auto}
+.eyebrow{font-family:'Space Grotesk',monospace;font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--green);margin-bottom:18px}
+h2{font-size:clamp(40px,6.4vw,84px);line-height:.97;margin-bottom:26px}
+h2 .line{display:block;overflow:hidden}
+h2 .line>span{display:inline-block}
+p.lede{color:var(--body);font-size:clamp(17px,1.6vw,20px);line-height:1.75;max-width:62ch}
 
-/* experience */
-.exp{min-height:92svh;display:flex;align-items:center;background:var(--black)}
-.exp .bg{position:absolute;inset:0;background:url('assets/img/live-09.jpg') center 30%/cover no-repeat;opacity:.68}
-.exp .shade{position:absolute;inset:0;background:linear-gradient(to right,rgba(5,5,5,.95) 26%,rgba(5,5,5,.42) 66%,rgba(5,5,5,.7) 100%),linear-gradient(to top,var(--black) 2%,transparent 30%),linear-gradient(to bottom,var(--black) 2%,transparent 26%)}
-.exp-inner{position:relative;z-index:2;padding:110px 40px;max-width:760px}
-.exp p{color:#C2C7CE;font-size:15.5px;line-height:1.75;max-width:560px;margin:22px 0 0}
-.eq{display:flex;gap:5px;align-items:flex-end;height:44px;margin-top:30px}
-.eq i{width:5px;background:linear-gradient(to top,var(--green),rgba(57,255,20,.2));border-radius:2px;animation:eq 1.1s ease-in-out infinite alternate;box-shadow:0 0 8px rgba(57,255,20,.5)}
-.eq i:nth-child(3n){background:linear-gradient(to top,var(--pink),rgba(255,47,185,.2));box-shadow:0 0 8px rgba(255,47,185,.5)}
-@keyframes eq{from{height:18%}to{height:100%}}
+/* marquee */
+.marquee{position:relative;z-index:6;overflow:hidden;background:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;transform:rotate(-1.3deg) scale(1.02);margin:-12px 0 0}
+.mq-track{display:flex;gap:0;white-space:nowrap;will-change:transform}
+.mq-track span{font-family:'Anton',sans-serif;font-size:clamp(20px,2.6vw,34px);letter-spacing:.06em;text-transform:uppercase;color:var(--bone);padding:0 18px}
+.mq-track b{color:var(--pink);font-weight:400;padding:0 4px}
+.mq-track .g{color:var(--green)}
 
-/* photos */
-.live{padding:110px 0 90px;background:var(--black)}
-.live .head{padding:0 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.strip{display:flex;gap:10px;margin-top:40px;padding:0 40px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.strip::-webkit-scrollbar{display:none}
-.strip a{flex:none;position:relative}
-.strip img{height:clamp(240px,42vh,420px);width:auto;border:1px solid #1E2024;filter:saturate(1.05);transition:transform .35s,box-shadow .35s}
-.strip a:hover img{transform:translateY(-8px);box-shadow:0 0 34px rgba(57,255,20,.3)}
+/* about — full-bleed background photo, copy clear of her */
+.about-sec{max-width:none;padding:0}
+.about-stage{position:relative;height:max(min(100svh,56.25vw),540px);display:flex;align-items:center;overflow:hidden}
+.about-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_2000/f_auto/q_auto/djhollyweed/about-wide');background-size:cover;background-position:right 45%;transform:scale(1.04);transform-origin:right center;will-change:transform}
+.about-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.94) 0%,rgba(5,5,5,.74) 32%,rgba(5,5,5,.3) 50%,transparent 64%)}
+.about-copy{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:40px clamp(18px,5vw,64px)}
+.about-copy .inner{max-width:560px}
+/* book-now banner */
+.bookbar-sec{max-width:none;padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(57,255,20,.09),rgba(5,5,5,0) 42%,rgba(255,47,185,.09))}
+.bookbar{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;max-width:1280px;margin:0 auto;padding:46px clamp(18px,5vw,64px)}
+.bookbar .bigword{font-size:clamp(42px,6vw,78px);line-height:.95}
+.bookbar .label{display:block;margin-top:10px;color:var(--mid)}
+.btn-big{padding:20px 46px;font-size:16px;letter-spacing:.1em}
+.factline{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.factchip{border:1px solid var(--border);border-radius:999px;padding:10px 17px;font-size:14px;color:var(--body);background:rgba(5,5,5,.5)}
+.factchip b{color:var(--bone);font-weight:600}
+@media(max-width:1024px){
+  .about-stage{display:block;height:auto}
+  .about-bg{position:relative;inset:auto;aspect-ratio:2/3;transform:none;background-image:url('assets/img/hero-smoke.jpg');background-position:center}
+  .about-scrim{display:none}
+  .about-copy{max-width:none;padding:46px 18px 90px}
+}
+
+/* mixes — waves animation IS the section background */
+.mixes{max-width:none;position:relative;overflow:hidden;padding:0}
+#freq{position:absolute;inset:0;width:100%;height:100%}
+.mixes-scrim{position:absolute;inset:0;background:radial-gradient(95% 85% at 50% 50%,rgba(5,5,5,.2),rgba(5,5,5,.8))}
+.mixes-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:clamp(110px,16vh,180px) clamp(18px,5vw,64px)}
+.musiclinks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px;max-width:880px}
+.mlink{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--border);border-radius:14px;padding:22px;background:rgba(5,5,5,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:.25s}
+.mlink:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 0 34px rgba(57,255,20,.18)}
+.mlink .t{font-weight:800;font-size:18px;letter-spacing:.03em}
+.mlink .d{display:block;color:var(--mid);font-size:13px;margin-top:5px;font-family:'Space Grotesk',monospace;letter-spacing:.12em;text-transform:uppercase}
+.mlink .ar{color:var(--green);font-size:20px;flex-shrink:0}
+@media(max-width:680px){.musiclinks{grid-template-columns:1fr}}
 
 /* shows */
-.shows{padding:110px 40px;background:var(--black)}
-.srows{margin-top:44px;border-top:1px solid var(--line)}
-.srow{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:24px;padding:26px 0;border-bottom:1px solid var(--line);transition:background .25s;position:relative}
-.srow:hover{background:rgba(57,255,20,.035)}
-.sdate{font-family:'Anton',sans-serif;font-size:clamp(20px,2.3vw,30px);line-height:1;text-transform:uppercase;color:var(--bone)}
-.sdate small{display:block;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;color:var(--mid);margin-top:6px}
-.sdate.next{color:var(--pink);text-shadow:0 0 16px rgba(255,47,185,.5)}
-.sname{font-family:'Anton',sans-serif;font-size:clamp(20px,2.4vw,30px);letter-spacing:-0.01em;text-transform:uppercase;color:var(--bone)}
-.svenue{display:block;font-family:'Archivo',sans-serif;font-size:13px;color:var(--body);margin-top:7px;text-transform:none;letter-spacing:0}
-.evlink{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);border-bottom:1px solid rgba(57,255,20,.4)}
-.chipb{font-family:'Space Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;text-align:center;padding:8px 16px;border-radius:999px;border:1px solid var(--green);color:var(--green);box-shadow:0 0 14px rgba(57,255,20,.25) inset}
-.chipb-solid{background:var(--green);color:var(--black);box-shadow:0 0 22px rgba(57,255,20,.5)}
+.srow{display:grid;grid-template-columns:150px 1fr auto;gap:22px;align-items:center;padding:26px 10px;border-bottom:1px solid var(--line);transition:background .25s,transform .25s}
+.srow:first-of-type{border-top:1px solid var(--line)}
+.srow:hover{background:rgba(57,255,20,.035);transform:translateX(6px)}
+.sdate{font-size:30px;line-height:1}
+.sdate small{display:block;font-family:'Space Grotesk',monospace;font-size:11.5px;letter-spacing:.22em;color:var(--mid);margin-top:7px;text-transform:uppercase}
+.sdate.next{color:var(--pink);animation:nextpulse 2.2s ease-in-out infinite}
+@keyframes nextpulse{0%,100%{text-shadow:0 0 18px rgba(255,47,185,.35)}50%{text-shadow:0 0 40px rgba(255,47,185,.85)}}
+.sname{display:block;font-weight:800;font-size:clamp(17px,2vw,22px);letter-spacing:.02em}
+.svenue{display:block;color:var(--body);font-size:15.5px;margin-top:6px;line-height:1.6}
+.evlink{color:var(--green);border-bottom:1px solid rgba(57,255,20,.35)}
+.chipb{border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);white-space:nowrap}
+.chipb-solid{border-color:var(--pink);color:var(--pink)}
+@media(max-width:760px){.srow{grid-template-columns:1fr;gap:10px}.chipb{justify-self:start}}
 
-/* CTA */
-.cta{min-height:96svh;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--black);overflow:hidden}
-.ring{position:absolute;left:50%;top:50%;width:min(64vmin,620px);height:min(64vmin,620px);transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
-.ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(57,255,20,.75);box-shadow:0 0 36px rgba(57,255,20,.55),inset 0 0 36px rgba(57,255,20,.3);animation:pulse 3.2s ease-in-out infinite}
-.ring::after{content:"";position:absolute;inset:-22px;border-radius:50%;border:1px solid rgba(255,47,185,.35);box-shadow:0 0 28px rgba(255,47,185,.3);animation:pulse 3.2s ease-in-out infinite reverse}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.04);opacity:.75}}
-.cta .bg{position:absolute;inset:0;background:url('assets/img/live-13.jpg') center 20%/cover no-repeat;opacity:.28;filter:saturate(1.1)}
-.cta .shade{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 20%,rgba(5,5,5,.92) 78%),linear-gradient(to top,var(--black) 4%,transparent 30%),linear-gradient(to bottom,var(--black) 4%,transparent 26%)}
-.cta-inner{position:relative;z-index:2;padding:40px}
-.cta h2{font-size:clamp(44px,7vw,100px)}
-.cta .sub{color:#C2C7CE;font-size:15px;margin:18px auto 0;max-width:440px}
-.cta .btn{margin-top:34px}
+/* gallery — pinned horizontal on desktop */
+.gal-sec{max-width:none;padding-left:0;padding-right:0}
+.gal-head{max-width:1280px;margin:0 auto;padding:0 clamp(18px,5vw,64px)}
+.gal-pin{position:relative;overflow:hidden}
+.gal-track{display:flex;gap:22px;padding:34px clamp(18px,5vw,64px);will-change:transform;width:max-content}
+.gcard{position:relative;flex:0 0 auto;width:min(72vw,880px);aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--panel)}
+.gcard img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform}
+.gcard video{width:100%;height:100%;object-fit:cover}
+.gcard figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 18px 14px;font-family:'Space Grotesk',monospace;font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);background:linear-gradient(transparent,rgba(5,5,5,.85))}
+@media(max-width:860px){
+  .gal-track{flex-direction:column;width:auto;padding-top:10px}
+  .gcard{width:100%}
+}
+
+/* book */
+.book-sec{position:relative;overflow:hidden;max-width:none}
+.book-inner{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+.ringwrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:min(78vw,640px);aspect-ratio:1;z-index:1;pointer-events:none;opacity:.5}
+.ringwrap .ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(57,255,20,.5);animation:ringpulse 3s ease-in-out infinite}
+.ringwrap .ring2{position:absolute;inset:-7%;border-radius:50%;border:1px dashed rgba(255,47,185,.45);animation:spin 26s linear infinite}
+.ringwrap .orb{position:absolute;top:50%;left:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--green);box-shadow:0 0 18px var(--green);animation:orbit 7s linear infinite}
+@keyframes ringpulse{0%,100%{box-shadow:0 0 40px rgba(57,255,20,.15),inset 0 0 40px rgba(57,255,20,.08);transform:scale(1)}50%{box-shadow:0 0 90px rgba(57,255,20,.35),inset 0 0 70px rgba(57,255,20,.16);transform:scale(1.035)}}
+@keyframes orbit{from{transform:rotate(0deg) translateX(calc(min(39vw,320px)))}to{transform:rotate(360deg) translateX(calc(min(39vw,320px)))}}
+.book-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,72px);align-items:start}
+.book form{display:grid;gap:14px}
+.book-grid label{font-family:'Space Grotesk',monospace;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mid)}
+.book-grid input,.book-grid select,.book-grid textarea{width:100%;background:rgba(10,11,12,.85);border:1px solid var(--border);border-radius:10px;color:var(--bone);padding:13px 15px;font-family:'Archivo',sans-serif;font-size:16px;margin-top:6px;transition:border-color .2s,box-shadow .2s}
+.book-grid input:focus,.book-grid select:focus,.book-grid textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 22px rgba(57,255,20,.15)}
+.book-grid textarea{min-height:120px;resize:vertical}
+.direct{margin-top:18px;color:var(--mid);font-size:15px;line-height:1.7}
+.direct a{color:var(--green)}
+.chibi{width:min(100%,420px);border-radius:26px;border:1px solid rgba(57,255,20,.3);box-shadow:0 0 50px rgba(57,255,20,.3);margin-top:30px;animation:bob 3.4s ease-in-out infinite}
+@media(max-width:900px){.book-grid{grid-template-columns:1fr}}
 
 /* footer */
-footer{position:relative;border-top:1px solid var(--line);padding:46px 40px 40px;background:var(--black)}
-.wave{display:block;width:100%;height:46px;margin-bottom:30px;opacity:.85}
-.wave path{stroke:var(--green);stroke-width:1.6;fill:none;filter:drop-shadow(0 0 5px rgba(57,255,20,.7))}
-.frow{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
-.socials{display:flex;gap:22px}
-.socials a{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.18em;color:var(--mid);text-transform:uppercase;transition:color .2s}
-.socials a:hover{color:var(--green)}
+footer{position:relative;z-index:6;border-top:1px solid var(--line);padding:46px clamp(18px,5vw,64px);display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between;background:var(--ink)}
+footer .socials{display:flex;gap:22px}
+footer a{color:var(--body);font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+footer a:hover{color:var(--green)}
+footer .mini{color:var(--mid);font-size:13px}
+.wave{position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),var(--pink),transparent);opacity:.5;animation:wavec 5s linear infinite;background-size:200% 100%}
+@keyframes wavec{to{background-position:200% 0}}
 
-/* reveal on scroll */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.rv.on{opacity:1;transform:none}
-
-@media (max-width:860px){
-  header{padding:12px 16px}
-  nav{display:none}
-  .hero-inner,.exp-inner{padding-left:18px;padding-right:18px}
-  .live .head,.shows{padding-left:18px;padding-right:18px}
-  .strip{padding:0 18px}
-  .strip img{height:240px}
-  .srow{grid-template-columns:86px 1fr;gap:8px 14px}
-  .srow .chipb{grid-column:2;justify-self:start}
-  footer{padding:36px 18px}
-  .frow{justify-content:center;text-align:center}
+@media(max-width:480px){
+  nav{padding:12px 14px}
+  nav .wordmark{font-size:15px}
+  nav .btn{padding:10px 16px;font-size:12px}
+  footer{justify-content:center;text-align:center;gap:16px}
+  footer .socials{gap:14px;flex-wrap:wrap;justify-content:center}
 }
 @media (prefers-reduced-motion: reduce){
-  .smoke i,.beams i,.eq i,.ring::before,.ring::after,.slick{animation:none}
-  .rv{opacity:1;transform:none;transition:none}
+  .hud .r1,.hud .r2,.hud .arrow,.sdate.next,.ringwrap *,.chibi,.wave{animation:none!important}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <a class="logo" href="#top" aria-label="DJ Holly Weed">
-    <svg viewBox="-100 -110 200 140" width="24" aria-hidden="true"><g fill="currentColor"><path d="M0,10 C7,-22 7,-70 0,-104 C-7,-70 -7,-22 0,10 Z"/><path transform="rotate(28)" d="M0,10 C7,-20 7,-62 0,-92 C-7,-62 -7,-20 0,10 Z"/><path transform="rotate(-28)" d="M0,10 C7,-20 7,-62 0,-92 C-7,-62 -7,-20 0,10 Z"/><path transform="rotate(56)" d="M0,10 C6,-16 6,-50 0,-74 C-6,-50 -6,-16 0,10 Z"/><path transform="rotate(-56)" d="M0,10 C6,-16 6,-50 0,-74 C-6,-50 -6,-16 0,10 Z"/><path transform="rotate(84)" d="M0,10 C5,-12 5,-34 0,-50 C-5,-34 -5,-12 0,10 Z"/><path transform="rotate(-84)" d="M0,10 C5,-12 5,-34 0,-50 C-5,-34 -5,-12 0,10 Z"/><path d="M-2.4,6 L2.4,6 L1.2,28 L-1.2,28 Z"/></g></svg>
-    <span>Holly Weed</span>
-  </a>
-  <nav>
-    <a class="navlink" href="about.html">About</a>
-    <a class="navlink" href="photos.html">Photos</a>
-    <a class="navlink" href="#shows">Shows</a>
-    <a class="navlink" href="assets/DJHollyWeed-EPK.pdf" download>Press Kit</a>
-    <a class="navlink" href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">Mixes</a>
-  </nav>
-  <a class="btn slick" href="mailto:ms.hollyweed@gmail.com?subject=Booking%20enquiry%20%E2%80%94%20DJ%20Holly%20Weed">Book Now</a>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<nav>
+  <a class="wordmark" href="#top" data-scroll>DJ HOLLY <b>WEED</b></a>
+  <ul>
+    <li><a href="#about" data-scroll>About</a></li>
+    <li><a href="#mixes" data-scroll>Mixes</a></li>
+    <li><a href="#gigs" data-scroll>Shows</a></li>
+    <li><a href="#gallery" data-scroll>Gallery</a></li>
+    <li><a href="assets/DJHollyWeed-EPK.pdf" download>Press Kit</a></li>
+  </ul>
+  <a class="btn btn-slick" href="#book" data-scroll>Book Now</a>
+</nav>
+
+<main id="top">
+
+<!-- ======== HERO · EDIT headline / tagline here ======== -->
+<header class="hero" id="hero">
+  <video class="vid" src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794901221/djhollyweed/booth-loop.mp4"
+    poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_0,f_jpg,q_auto/v1794901221/djhollyweed/booth-loop.jpg"
+    autoplay muted loop playsinline aria-label="DJ Holly Weed in the booth"></video>
+  <div class="tint"></div>
+  <div class="hero-inner">
+    <div class="label kicker">Las Vegas · DJ × Stoned Circus</div>
+    <h1 id="headline">The night is <span class="row2">higher.</span></h1>
+    <p class="sub">Any kind of music, any time — played by a circus performer who spent years holding crowds of thousands. A performance, not just a set.</p>
+    <div class="ctas">
+      <a class="btn btn-slick" href="#book" data-scroll>Book the Night</a>
+      <a class="btn btn-outline" href="#mixes" data-scroll>Hear the Set</a>
+    </div>
+  </div>
+  <div class="hud" aria-hidden="true">
+    <svg viewBox="0 0 74 74">
+      <circle class="r1" cx="37" cy="37" r="34" fill="none" stroke="rgba(57,255,20,.5)" stroke-width="1.5" stroke-dasharray="40 173"/>
+      <circle class="r2" cx="37" cy="37" r="27" fill="none" stroke="rgba(255,47,185,.5)" stroke-width="1" stroke-dasharray="8 20"/>
+    </svg>
+    <div class="arrow">↓</div>
+  </div>
 </header>
 
-<div class="grain"></div>
+<div class="over">
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="bg"></div>
-  <div class="smoke"><i class="g" style="left:-18%;top:28%"></i><i class="p" style="right:-22%;top:-12%"></i><i class="b" style="left:28%;bottom:-30%"></i></div>
-  <div class="beams"><i></i><i></i><i></i><i></i></div>
-  <div class="shade"></div>
-  <div class="hero-inner">
-    <img class="script-logo" src="assets/img/logo-script.png" alt="Holly Weed">
-    <div class="kicker"><span class="dot"></span><span>Las Vegas · DJ × Stoned Circus</span></div>
-    <h1>The night<br>is <span class="hl">higher.</span></h1>
-    <p class="sub">Any kind of music, any time — remixes of rap, riddim, drum and bass, techno, hardstyle, chillstep, EDM, rock, alt and more. A performance, not just a set.</p>
-    <div class="ctas">
-      <a class="circle-btn" href="#experience" aria-label="Scroll down">↓</a>
-      <a class="btn btn-outline" href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">Hear the Set</a>
+<!-- genre marquee · EDIT genres here -->
+<div class="marquee" aria-label="Genres">
+  <div class="mq-track" id="mq">
+    <span>Rap remixes<b>★</b></span><span class="g">Riddim<b>★</b></span><span>Drum &amp; Bass<b>★</b></span><span class="g">Techno<b>★</b></span><span>Hardstyle<b>★</b></span><span class="g">Chillstep<b>★</b></span><span>EDM<b>★</b></span><span class="g">Rock<b>★</b></span><span>Alt<b>★</b></span>
+  </div>
+</div>
+
+<!-- ======== 01 ABOUT · EDIT bio here ======== -->
+<section id="about" class="about-sec">
+  <div class="about-stage">
+    <div class="about-bg" role="img" aria-label="DJ Holly Weed in green smoke"></div>
+    <div class="about-scrim" aria-hidden="true"></div>
+    <div class="about-copy">
+      <div class="inner">
+      <div class="eyebrow rv">About</div>
+      <h2><span class="line"><span>Circus stage,</span></span><span class="line"><span class="hl">meet the decks.</span></span></h2>
+      <p class="lede rv">DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She booked Burning Man before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival, sets during build and tear down with Camp VIP at Burning Man 2026, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
+      <div class="factline rv">
+        <span class="factchip"><b>Base</b> · Las Vegas, NV — will travel</span>
+        <span class="factchip"><b>Booking</b> · ms.hollyweed@gmail.com</span>
+        <span class="factchip"><b>Socials</b> · @djhollyweed</span>
+      </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
-<section class="exp" id="experience">
-  <div class="bg"></div>
-  <div class="smoke"><i class="g" style="right:-25%;bottom:-20%"></i></div>
-  <div class="shade"></div>
-  <div class="exp-inner rv">
-    <div class="eyebrow">01 — The Experience</div>
-    <h2>A performance,<br><span class="hl">not just a set.</span></h2>
-    <p>Years of professional circus performance for crowds of thousands — MGM Grand, EDC's main stage, AREA15 — brought to the decks. First season delivered: three one-hour sets at Southwest Flow Festival, build and tear down sets with Camp VIP at Burning Man, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
-    <div class="eq"><i style="animation-delay:0s"></i><i style="animation-delay:-.2s"></i><i style="animation-delay:-.5s"></i><i style="animation-delay:-.1s"></i><i style="animation-delay:-.7s"></i><i style="animation-delay:-.35s"></i><i style="animation-delay:-.9s"></i><i style="animation-delay:-.15s"></i><i style="animation-delay:-.6s"></i><i style="animation-delay:-.4s"></i><i style="animation-delay:-.8s"></i><i style="animation-delay:-.25s"></i><i style="animation-delay:-.55s"></i><i style="animation-delay:-.05s"></i></div>
-    <div class="ctas" style="margin-top:34px;display:flex;gap:14px">
-      <a class="btn btn-outline" href="about.html">Full Bio</a>
-      <a class="btn btn-outline" href="assets/DJHollyWeed-EPK.pdf" download>Download EPK</a>
+<!-- ======== BOOK-NOW BANNER ======== -->
+<section class="bookbar-sec" aria-label="Book DJ Holly Weed">
+  <div class="bookbar">
+    <div class="rv">
+      <div class="bigword">Book the <span class="hl">whole show.</span></div>
+      <span class="label">Las Vegas · will travel · any kind of music, any time</span>
+    </div>
+    <a class="btn btn-slick btn-big rv" href="#book" data-scroll>Book Now</a>
+  </div>
+</section>
+
+<!-- ======== 02 MIXES · EDIT music links here ======== -->
+<section class="mixes" id="mixes">
+  <canvas id="freq" aria-hidden="true"></canvas>
+  <div class="mixes-scrim" aria-hidden="true"></div>
+  <div class="mixes-inner">
+    <div class="eyebrow rv">Mixes</div>
+    <h2><span class="line"><span>Feel the</span></span><span class="line"><span class="pk">frequency.</span></span></h2>
+    <p class="lede rv">Live sets, mixes and the playlists behind them.</p>
+    <div class="musiclinks">
+      <a class="mlink rv" href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">
+        <span><span class="t">SoundCloud</span><span class="d">@djhollyweed · live sets &amp; mixes</span></span><span class="ar">↗</span></a>
+      <a class="mlink rv" href="https://open.spotify.com/playlist/3jaXhAGGbOeAq72CbvAAY7" target="_blank" rel="noopener">
+        <span><span class="t">Flowy EDM</span><span class="d">Spotify playlist · the flow state</span></span><span class="ar">↗</span></a>
+      <a class="mlink rv" href="https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe" target="_blank" rel="noopener">
+        <span><span class="t">Spotify</span><span class="d">profile · all playlists</span></span><span class="ar">↗</span></a>
+      <a class="mlink rv" href="https://instagram.com/djhollyweed" target="_blank" rel="noopener">
+        <span><span class="t">Instagram</span><span class="d">@djhollyweed · clips &amp; shows</span></span><span class="ar">↗</span></a>
     </div>
   </div>
 </section>
 
-<!-- LIVE PHOTOS -->
-<section class="live">
-  <div class="head rv">
-    <div>
-      <div class="eyebrow">02 — Live</div>
-      <h2>Festival <span class="pk">lights.</span></h2>
-    </div>
-    <a class="btn btn-outline" href="photos.html">All Photos →</a>
+<!-- ======== 03 SHOWS · EDIT gig dates here ======== -->
+<section id="gigs">
+  <div class="eyebrow rv">Shows</div>
+  <h2><span class="line"><span>On the</span></span><span class="line"><span class="hl">calendar.</span></span></h2>
+  <div class="srow rv">
+    <div class="sdate next">Jan 16<small>2027 · Next Up</small></div>
+    <div><span class="sname">Dystopia</span>
+      <span class="svenue">Regal Rooms · 1204 Regal Row, Austin TX · Dragonwolf Productions · Doors 8 PM &nbsp;·&nbsp; <a class="evlink" href="https://www.regalrooms.com/event-details/dystopia" target="_blank" rel="noopener">Event Info + Tickets ↗</a></span></div>
+    <span class="chipb chipb-solid">Confirmed</span>
   </div>
-  <div class="strip rv">
-    <a href="photos.html"><img src="assets/img/live-01.jpg" alt="Southwest Flow Festival — on the decks"></a>
-    <a href="photos.html"><img src="assets/img/live-04.jpg" alt="Southwest Flow Festival"></a>
-    <a href="photos.html"><img src="assets/img/live-09.jpg" alt="Behind the decks"></a>
-    <a href="photos.html"><img src="assets/img/live-05.jpg" alt="Southwest Flow Festival"></a>
-    <a href="photos.html"><img src="assets/img/live-11.jpg" alt="Las Vegas"></a>
-    <a href="photos.html"><img src="assets/img/live-02.jpg" alt="Southwest Flow Festival"></a>
+  <div class="srow rv">
+    <div class="sdate">Nov 13<small>2026 · Played</small></div>
+    <div><span class="sname">PULSE — Opening Set</span>
+      <span class="svenue">Taverna Costera · Las Vegas Arts District · opened the night alongside an incredible DJ lineup</span></div>
+    <span class="chipb">Played</span>
+  </div>
+  <div class="srow rv">
+    <div class="sdate">2026<small>Played</small></div>
+    <div><span class="sname">Southwest Flow Festival</span>
+      <span class="svenue">Southwest US · three separate one-hour sets — festival debut season</span></div>
+    <span class="chipb">Played</span>
+  </div>
+  <div class="srow rv">
+    <div class="sdate">2026<small>Played</small></div>
+    <div><span class="sname">Burning Man — Camp VIP</span>
+      <span class="svenue">Black Rock City · Very Inappropriate People · sets during build and tear down</span></div>
+    <span class="chipb">Played</span>
   </div>
 </section>
 
-<!-- SHOWS -->
-<section class="shows" id="shows">
-  <div class="rv">
-    <div class="eyebrow">03 — Shows</div>
-    <h2>On the <span class="hl">calendar.</span></h2>
+<!-- ======== 04 GALLERY (16:9 expanded photos) ======== -->
+<section class="gal-sec" id="gallery">
+  <div class="gal-head">
+    <div class="eyebrow rv">Gallery</div>
+    <h2><span class="line"><span>Festival</span></span><span class="line"><span class="pk">lights.</span></span></h2>
   </div>
-  <div class="srows rv">
-    <div class="srow">
-      <div class="sdate next">Jan 16<small>2027 · Next Up</small></div>
-      <div><span class="sname">Dystopia</span>
-        <span class="svenue">Regal Rooms · 1204 Regal Row, Austin TX · Dragonwolf Productions · Doors 8 PM &nbsp;·&nbsp; <a class="evlink" href="https://www.regalrooms.com/event-details/dystopia" target="_blank" rel="noopener">Event Info + Tickets ↗</a></span></div>
-      <span class="chipb chipb-solid">Confirmed</span>
-    </div>
-    <div class="srow">
-      <div class="sdate">Nov 13<small>2026 · Played</small></div>
-      <div><span class="sname">PULSE — Opening Set</span>
-        <span class="svenue">Taverna Costera · Las Vegas Arts District · opened the night alongside an incredible DJ lineup</span></div>
-      <span class="chipb">Played</span>
-    </div>
-    <div class="srow">
-      <div class="sdate">2026<small>Played</small></div>
-      <div><span class="sname">Southwest Flow Festival</span>
-        <span class="svenue">Southwest US · three separate one-hour sets — festival debut season</span></div>
-      <span class="chipb">Played</span>
-    </div>
-    <div class="srow">
-      <div class="sdate">2026<small>Played</small></div>
-      <div><span class="sname">Burning Man — Camp VIP</span>
-        <span class="svenue">Black Rock City · Very Inappropriate People · sets during build and tear down</span></div>
-      <span class="chipb">Played</span>
+  <div class="gal-pin" id="galpin">
+    <div class="gal-track" id="galtrack">
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-11-wide" alt="DJ Holly Weed under a pink light fan, Las Vegas"><figcaption>Las Vegas</figcaption></figure>
+      <figure class="gcard"><video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/flow-hoop.mp4" poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_1,f_jpg,q_auto/djhollyweed/flow-hoop.jpg" autoplay muted loop playsinline aria-label="LED hoop performance at PULSE"></video><figcaption>LED hoop · PULSE at Taverna Costera</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-09-wide" alt="Green-lit set behind the decks"><figcaption>Behind the decks</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/pulse-02-wide" alt="On the decks at PULSE, Taverna Costera"><figcaption>PULSE · Taverna Costera</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-04-wide" alt="Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
+      <figure class="gcard"><video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/flow-batons.mp4" poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_1,f_jpg,q_auto/djhollyweed/flow-batons.jpg" autoplay muted loop playsinline aria-label="LED flow performance in slow motion"></video><figcaption>LED flow · slow motion</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-13-wide" alt="Green-lit festival set"><figcaption>Festival set</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/pulse-03-wide" alt="Red-lit booth at PULSE, Taverna Costera"><figcaption>PULSE · Taverna Costera</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta">
-  <div class="bg"></div>
-  <div class="smoke"><i class="g" style="left:-20%;top:-15%"></i><i class="p" style="right:-20%;bottom:-25%"></i></div>
-  <div class="shade"></div>
-  <div class="ring"></div>
-  <div class="cta-inner rv">
-    <div class="eyebrow" style="justify-content:center">More than music</div>
-    <h2>Ready to get<br><span class="hl">higher?</span></h2>
-    <p class="sub">Las Vegas based · will travel · 60–120 min open-format sets · circus elements available</p>
-    <a class="btn slick" href="mailto:ms.hollyweed@gmail.com?subject=Booking%20enquiry%20%E2%80%94%20DJ%20Holly%20Weed">Book Your Event →</a>
+<!-- ======== 05 BOOK · the goal of the whole site ======== -->
+<section class="book-sec" id="book">
+  <div class="ringwrap" aria-hidden="true"><div class="ring"></div><div class="ring2"></div><div class="orb"></div></div>
+  <div class="book-inner">
+    <div class="eyebrow rv">Book</div>
+    <h2><span class="line"><span>Step right</span></span><span class="line"><span class="hl">up.</span></span></h2>
+    <div class="book-grid">
+      <div>
+        <p class="lede rv">The greatest show after dark. Clubs, festivals, art cars, private and corporate events — based in Las Vegas, happy to run away with your circus. Tell us about the night and we'll get right back to you.</p>
+        <video class="chibi rv" src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794899762/djhollyweed/dj-holly-loop.mp4" autoplay muted loop playsinline aria-label="Animated DJ Holly Weed"></video>
+      </div>
+      <form id="bookform" class="rv">
+        <div><label for="bf-name">Your name</label><input id="bf-name" name="name" required autocomplete="name"></div>
+        <div><label for="bf-email">Email</label><input id="bf-email" name="email" type="email" required autocomplete="email"></div>
+        <div><label for="bf-date">Event date</label><input id="bf-date" name="date" type="date"></div>
+        <div><label for="bf-venue">Venue / city</label><input id="bf-venue" name="venue"></div>
+        <div><label for="bf-type">Event type</label>
+          <select id="bf-type" name="type">
+            <option>Club night</option><option>Festival</option><option>Private event</option><option>Corporate</option><option>Other</option>
+          </select></div>
+        <div><label for="bf-msg">About the event</label><textarea id="bf-msg" name="msg"></textarea></div>
+        <button class="btn btn-slick" type="submit">Send Booking Inquiry</button>
+        <p class="direct">The button opens a pre-filled email from your mail app.<br>Direct line: <a href="mailto:ms.hollyweed@gmail.com">ms.hollyweed@gmail.com</a></p>
+      </form>
+    </div>
   </div>
 </section>
+
+</div><!-- /.over -->
+</main>
 
 <footer>
-  <svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L30,30 40,12 52,48 64,22 76,38 90,30 130,30 142,8 154,52 166,18 178,42 192,30 260,30 272,14 284,46 296,24 308,36 322,30 420,30 432,10 444,50 456,20 468,40 482,30 560,30 572,16 584,44 596,26 608,34 622,30 740,30 752,6 764,54 776,16 788,44 802,30 880,30 892,18 904,42 916,24 928,36 942,30 1040,30 1052,12 1064,48 1076,22 1088,38 1102,30 1200,30"/></svg>
-  <div class="frow">
-    <span class="label dim">© <span id="year">2026</span> DJ Holly Weed · Las Vegas NV</span>
-    <span class="label dim">MS.HOLLYWEED@GMAIL.COM</span>
-    <span class="socials">
-      <a href="https://www.instagram.com/djhollyweed" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">SoundCloud</a>
-      <a href="https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe" target="_blank" rel="noopener">Spotify</a>
-    </span>
+  <div class="wave" aria-hidden="true"></div>
+  <span class="label">DJ Holly Weed · Las Vegas</span>
+  <div class="socials">
+    <a href="https://instagram.com/djhollyweed" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">SoundCloud</a>
+    <a href="https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe" target="_blank" rel="noopener">Spotify</a>
+    <a href="mailto:ms.hollyweed@gmail.com">Booking</a>
   </div>
+  <span class="mini">Anything you can do, she can do higher.</span>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
-  }, {threshold: 0.18});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+/* ========= CONFIG — tune all motion here ========= */
+var CONFIG = {
+  heroLetterStagger: .045, heroRise: 90,
+  marqueeSpeed: 60,            // px per second
+  smoke: { count: 22, beams: 4 },
+  freq: { waves: [
+    { color:'#39FF14', amp:34, speed:1.15, len:.9 },
+    { color:'#FF2FB9', amp:24, speed:.8,  len:1.4 },
+    { color:'#00D8FF', amp:16, speed:1.6, len:2.1 } ], nodes: 7 },
+  galleryScrub: 1
+};
+/* ================================================ */
+(function(){
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+/* ---- booking form (content layer) ---- */
+document.getElementById('bookform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var get = function(id){ return document.getElementById(id).value; };
+  var body = 'Name: ' + get('bf-name') + '\nEmail: ' + get('bf-email') +
+    '\nEvent date: ' + get('bf-date') + '\nVenue / city: ' + get('bf-venue') +
+    '\nEvent type: ' + get('bf-type') + '\n\n' + get('bf-msg');
+  location.href = 'mailto:ms.hollyweed@gmail.com?subject=' +
+    encodeURIComponent('Booking inquiry — DJ Holly Weed') + '&body=' + encodeURIComponent(body);
+});
+
+/* play/pause looping videos as they enter and leave the viewport */
+if (window.IntersectionObserver) {
+  var vio = new IntersectionObserver(function(es){ es.forEach(function(e){
+    if (e.isIntersecting) e.target.play().catch(function(){}); else e.target.pause();
+  }); }, { rootMargin: '200px' });
+  document.querySelectorAll('video[autoplay]').forEach(function(v){ vio.observe(v); });
+}
+
+if (reduced) return; /* static but complete experience */
+
+/* ---- background smoke + beams canvas ---- */
+var fx = document.getElementById('fx'), fc = fx.getContext('2d');
+var W,H,DPR = Math.min(devicePixelRatio||1, 1.5), blobs=[], beams=[];
+function sizeFx(){ W = innerWidth; H = innerHeight; fx.width = W*DPR; fx.height = H*DPR; fc.setTransform(DPR,0,0,DPR,0,0); }
+sizeFx(); addEventListener('resize', sizeFx);
+var nB = innerWidth < 700 ? 12 : CONFIG.smoke.count;
+for (var i=0;i<nB;i++) blobs.push({ x:Math.random(), y:Math.random(), r:.09+Math.random()*.16, s:.012+Math.random()*.03, drift:(Math.random()-.5)*.015, g:Math.random()<.72, p:Math.random()*6.28 });
+for (var j=0;j<CONFIG.smoke.beams;j++) beams.push({ x:.1+Math.random()*.8, w:.05+Math.random()*.06, sp:.08+Math.random()*.12, p:Math.random()*6.28, pink:j%3===2 });
+var t0 = performance.now(), running = true;
+document.addEventListener('visibilitychange', function(){ running = !document.hidden; });
+(function drawFx(now){
+  requestAnimationFrame(drawFx);
+  if (!running) return;
+  var t = (now-t0)/1000;
+  fc.clearRect(0,0,W,H);
+  fc.globalCompositeOperation = 'lighter';
+  beams.forEach(function(b){
+    var sway = Math.sin(t*b.sp*2+b.p)*.09;
+    var x = (b.x+sway)*W, w = b.w*W;
+    var gr = fc.createLinearGradient(x-w,0,x+w,0);
+    var c = b.pink ? '255,47,185' : '57,255,20';
+    var a = .05+.035*Math.sin(t*.7+b.p);
+    gr.addColorStop(0,'rgba('+c+',0)'); gr.addColorStop(.5,'rgba('+c+','+a+')'); gr.addColorStop(1,'rgba('+c+',0)');
+    fc.fillStyle = gr;
+    fc.save(); fc.translate(x,0); fc.rotate(sway*.6); fc.fillRect(-w,-H*.2,w*2,H*1.4); fc.restore();
+  });
+  blobs.forEach(function(b){
+    b.y -= b.s/60; b.x += b.drift/60;
+    if (b.y < -b.r) { b.y = 1+b.r; b.x = Math.random(); }
+    var x=b.x*W, y=b.y*H, r=b.r*Math.min(W,H)*(1+.12*Math.sin(t+b.p));
+    var gr = fc.createRadialGradient(x,y,0,x,y,r);
+    var c = b.g ? '57,255,20' : '255,47,185';
+    gr.addColorStop(0,'rgba('+c+',.05)'); gr.addColorStop(1,'rgba('+c+',0)');
+    fc.fillStyle = gr; fc.beginPath(); fc.arc(x,y,r,0,6.29); fc.fill();
+  });
+  fc.globalCompositeOperation = 'source-over';
+})(t0);
+
+/* ---- frequency waves canvas (fills the Mixes section) ---- */
+var fq = document.getElementById('freq'), qc = fq.getContext('2d'), fW, fH, ampScale = 1;
+function sizeFq(){ var r = fq.getBoundingClientRect(); fW = r.width; fH = r.height; ampScale = Math.max(1, fH/340); fq.width = fW*DPR; fq.height = fH*DPR; qc.setTransform(DPR,0,0,DPR,0,0); }
+sizeFq(); addEventListener('resize', sizeFq);
+if (window.ResizeObserver) new ResizeObserver(sizeFq).observe(document.querySelector('.mixes'));
+var vel = 0;
+(function drawFq(now){
+  requestAnimationFrame(drawFq);
+  if (!running || !fW) return;
+  var t = (now-t0)/1000;
+  qc.clearRect(0,0,fW,fH);
+  var boost = 1 + Math.min(Math.abs(vel)/900, 1.6);
+  CONFIG.freq.waves.forEach(function(w,wi){
+    qc.beginPath();
+    for (var x=0;x<=fW;x+=4){
+      var y = fH/2 + Math.sin(x/ (fW/(6.28*w.len)) + t*w.speed*2 + wi*2)*w.amp*ampScale*boost*Math.sin(3.14*x/fW);
+      x===0 ? qc.moveTo(x,y) : qc.lineTo(x,y);
+    }
+    qc.strokeStyle = w.color; qc.globalAlpha = .8; qc.lineWidth = 1.6;
+    qc.shadowColor = w.color; qc.shadowBlur = 12; qc.stroke(); qc.shadowBlur = 0;
+  });
+  qc.globalAlpha = 1;
+  for (var n=0;n<CONFIG.freq.nodes;n++){
+    var px = ((t*.06*(n%3+1)+n/CONFIG.freq.nodes)%1)*fW;
+    var w0 = CONFIG.freq.waves[n%3];
+    var py = fH/2 + Math.sin(px/(fW/(6.28*w0.len)) + t*w0.speed*2 + (n%3)*2)*w0.amp*ampScale*boost*Math.sin(3.14*px/fW);
+    qc.fillStyle = w0.color; qc.shadowColor = w0.color; qc.shadowBlur = 16;
+    qc.beginPath(); qc.arc(px,py,3,0,6.29); qc.fill(); qc.shadowBlur = 0;
+  }
+})(t0);
+
+if (!hasGsap) return;
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---- Lenis smooth scroll ---- */
+var lenis = new Lenis({ lerp: .11 });
+lenis.on('scroll', function(e){ vel = e.velocity*60; ScrollTrigger.update(); });
+gsap.ticker.add(function(time){ lenis.raf(time*1000); });
+gsap.ticker.lagSmoothing(0);
+document.querySelectorAll('[data-scroll]').forEach(function(a){
+  a.addEventListener('click', function(ev){
+    var id = a.getAttribute('href');
+    if (id.charAt(0) !== '#') return;
+    ev.preventDefault(); lenis.scrollTo(id === '#top' ? 0 : id, { offset: -60 });
+  });
+});
+
+/* ---- hero entrance: split headline ---- */
+var hl = document.getElementById('headline');
+function splitEl(el){
+  var out = [];
+  el.childNodes.forEach(function(node){
+    if (node.nodeType === 3){
+      var frag = document.createDocumentFragment();
+      node.textContent.split('').forEach(function(ch){
+        var s = document.createElement('span'); s.className='ch'; s.textContent = ch; frag.appendChild(s); out.push(s);
+      });
+      el.replaceChild(frag, node);
+    } else if (node.nodeType === 1) out = out.concat(splitEl(node));
+  });
+  return out;
+}
+var chars = splitEl(hl);
+gsap.from(chars, { yPercent: 110, opacity: 0, duration: 1.05, ease: 'power4.out', stagger: CONFIG.heroLetterStagger, delay: .15 });
+gsap.from('.hero .kicker', { opacity: 0, y: -16, duration: .9, delay: .1 });
+gsap.from('.hero .sub, .hero .ctas', { opacity: 0, y: 26, duration: .9, stagger: .12, delay: .9 });
+gsap.from('.hero .vid', { scale: 1.14, duration: 2.2, ease: 'power2.out' });
+
+/* hero scroll-out: video zooms + headline drifts as content slides over */
+gsap.to('.hero .vid', { scale: 1.18, filter: 'saturate(1.08) contrast(1.04) brightness(.55) blur(6px)',
+  scrollTrigger: { trigger: '.over', start: 'top bottom', end: 'top top', scrub: true } });
+gsap.to('.hero-inner', { yPercent: -18, opacity: .0,
+  scrollTrigger: { trigger: '.over', start: 'top 95%', end: 'top 25%', scrub: true } });
+
+/* ---- marquee ---- */
+var mq = document.getElementById('mq');
+mq.innerHTML += mq.innerHTML + mq.innerHTML;
+var mqW = mq.scrollWidth/3;
+gsap.to(mq, { x: -mqW, duration: mqW/CONFIG.marqueeSpeed, ease: 'none', repeat: -1,
+  modifiers: { x: function(x){ return (parseFloat(x) % mqW) + 'px'; } } });
+
+/* ---- generic reveals ---- */
+document.querySelectorAll('.rv').forEach(function(el){
+  gsap.from(el, { y: 44, opacity: 0, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 88%' } });
+});
+document.querySelectorAll('h2 .line > span').forEach(function(el){
+  gsap.from(el, { yPercent: 115, duration: 1, ease: 'power4.out',
+    scrollTrigger: { trigger: el, start: 'top 88%' } });
+});
+/* about background: slow parallax drift (desktop layout only) */
+if (innerWidth > 1024) {
+  gsap.fromTo('.about-bg', { yPercent: -2.5, scale: 1.06 }, { yPercent: 2.5, scale: 1.06, ease: 'none',
+    scrollTrigger: { trigger: '.about-stage', start: 'top bottom', end: 'bottom top', scrub: true } });
+}
+
+/* ---- gallery: pinned horizontal scroll on desktop ---- */
+ScrollTrigger.matchMedia({
+  '(min-width: 861px)': function(){
+    var track = document.getElementById('galtrack');
+    var getX = function(){ return -(track.scrollWidth - innerWidth); };
+    gsap.to(track, { x: getX, ease: 'none',
+      scrollTrigger: { trigger: '#galpin', start: 'top 18%', end: function(){ return '+=' + (track.scrollWidth - innerWidth); },
+        pin: '.gal-sec', scrub: CONFIG.galleryScrub, invalidateOnRefresh: true } });
+    document.querySelectorAll('.gcard img').forEach(function(im){
+      gsap.fromTo(im, { xPercent: -5 }, { xPercent: 5, ease: 'none',
+        scrollTrigger: { trigger: '#galpin', start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+  },
+  '(max-width: 860px)': function(){
+    document.querySelectorAll('.gcard').forEach(function(c){
+      gsap.from(c, { y: 60, opacity: 0, duration: .9, ease: 'power3.out',
+        scrollTrigger: { trigger: c, start: 'top 90%' } });
+    });
+  }
+});
+
+setTimeout(function(){ ScrollTrigger.refresh(); }, 800);
+addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
 </script>
 </body>
 </html>
