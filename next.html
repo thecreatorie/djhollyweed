@@ -98,7 +98,14 @@ p.lede{color:var(--body);font-size:clamp(15.5px,1.4vw,18px);line-height:1.75;max
 .about-stage{position:relative;height:max(min(100svh,56.25vw),540px);display:flex;align-items:center;overflow:hidden}
 .about-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_2000/f_auto/q_auto/djhollyweed/about-wide');background-size:cover;background-position:right 45%;transform:scale(1.04);transform-origin:right center;will-change:transform}
 .about-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.94) 0%,rgba(5,5,5,.74) 32%,rgba(5,5,5,.3) 50%,transparent 64%)}
-.about-copy{position:relative;z-index:2;max-width:560px;padding:40px clamp(18px,5vw,64px)}
+.about-copy{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:40px clamp(18px,5vw,64px)}
+.about-copy .inner{max-width:560px}
+/* book-now banner */
+.bookbar-sec{max-width:none;padding:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(57,255,20,.09),rgba(5,5,5,0) 42%,rgba(255,47,185,.09))}
+.bookbar{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;max-width:1280px;margin:0 auto;padding:46px clamp(18px,5vw,64px)}
+.bookbar .bigword{font-size:clamp(42px,6vw,78px);line-height:.95}
+.bookbar .label{display:block;margin-top:10px;color:var(--mid)}
+.btn-big{padding:20px 46px;font-size:16px;letter-spacing:.1em}
 .factline{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .factchip{border:1px solid var(--border);border-radius:999px;padding:9px 16px;font-size:12.5px;color:var(--body);background:rgba(5,5,5,.5)}
 .factchip b{color:var(--bone);font-weight:600}
@@ -249,7 +256,8 @@ footer .mini{color:var(--mid);font-size:12px}
     <div class="about-bg" role="img" aria-label="DJ Holly Weed in green smoke"></div>
     <div class="about-scrim" aria-hidden="true"></div>
     <div class="about-copy">
-      <div class="eyebrow rv">01 — About</div>
+      <div class="inner">
+      <div class="eyebrow rv">About</div>
       <h2><span class="line"><span>Circus stage,</span></span><span class="line"><span class="hl">meet the decks.</span></span></h2>
       <p class="lede rv">DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She booked Burning Man before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival, sets during build and tear down with Camp VIP at Burning Man 2026, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
       <div class="factline rv">
@@ -257,7 +265,19 @@ footer .mini{color:var(--mid);font-size:12px}
         <span class="factchip"><b>Booking</b> · ms.hollyweed@gmail.com</span>
         <span class="factchip"><b>Socials</b> · @djhollyweed</span>
       </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ======== BOOK-NOW BANNER ======== -->
+<section class="bookbar-sec" aria-label="Book DJ Holly Weed">
+  <div class="bookbar">
+    <div class="rv">
+      <div class="bigword">Book the <span class="hl">night.</span></div>
+      <span class="label">Las Vegas · will travel · any kind of music, any time</span>
+    </div>
+    <a class="btn btn-slick btn-big rv" href="#book" data-scroll>Book Now</a>
   </div>
 </section>
 
@@ -266,7 +286,7 @@ footer .mini{color:var(--mid);font-size:12px}
   <canvas id="freq" aria-hidden="true"></canvas>
   <div class="mixes-scrim" aria-hidden="true"></div>
   <div class="mixes-inner">
-    <div class="eyebrow rv">02 — Mixes</div>
+    <div class="eyebrow rv">Mixes</div>
     <h2><span class="line"><span>Feel the</span></span><span class="line"><span class="pk">frequency.</span></span></h2>
     <p class="lede rv">Live sets, mixes and the playlists behind them.</p>
     <div class="musiclinks">
@@ -284,7 +304,7 @@ footer .mini{color:var(--mid);font-size:12px}
 
 <!-- ======== 03 SHOWS · EDIT gig dates here ======== -->
 <section id="gigs">
-  <div class="eyebrow rv">03 — Shows</div>
+  <div class="eyebrow rv">Shows</div>
   <h2><span class="line"><span>On the</span></span><span class="line"><span class="hl">calendar.</span></span></h2>
   <div class="srow rv">
     <div class="sdate next">Jan 16<small>2027 · Next Up</small></div>
@@ -315,7 +335,7 @@ footer .mini{color:var(--mid);font-size:12px}
 <!-- ======== 04 GALLERY (16:9 expanded photos) ======== -->
 <section class="gal-sec" id="gallery">
   <div class="gal-head">
-    <div class="eyebrow rv">04 — Gallery</div>
+    <div class="eyebrow rv">Gallery</div>
     <h2><span class="line"><span>Festival</span></span><span class="line"><span class="pk">lights.</span></span></h2>
   </div>
   <div class="gal-pin" id="galpin">
@@ -336,11 +356,11 @@ footer .mini{color:var(--mid);font-size:12px}
 <section class="book-sec" id="book">
   <div class="ringwrap" aria-hidden="true"><div class="ring"></div><div class="ring2"></div><div class="orb"></div></div>
   <div class="book-inner">
-    <div class="eyebrow rv">05 — Book</div>
-    <h2><span class="line"><span>Ready to get</span></span><span class="line"><span class="hl">higher?</span></span></h2>
+    <div class="eyebrow rv">Book</div>
+    <h2><span class="line"><span>Step right</span></span><span class="line"><span class="hl">up.</span></span></h2>
     <div class="book-grid">
       <div>
-        <p class="lede rv">Clubs, festivals, art cars, private and corporate events — based in Las Vegas, happy to travel. Tell us about the night and we'll get right back to you.</p>
+        <p class="lede rv">The greatest show after dark. Clubs, festivals, art cars, private and corporate events — based in Las Vegas, happy to run away with your circus. Tell us about the night and we'll get right back to you.</p>
         <video class="chibi rv" src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794899762/djhollyweed/dj-holly-loop.mp4" autoplay muted loop playsinline aria-label="Animated DJ Holly Weed"></video>
       </div>
       <form id="bookform" class="rv">
