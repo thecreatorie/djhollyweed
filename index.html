@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>DJ Holly Weed — Las Vegas DJ × Stoned Circus</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="DJ Holly Weed — Las Vegas DJ and circus performer. Any genre, any time. Booking: ms.hollyweed@gmail.com">
+<meta name="description" content="DJ Holly Weed — Her Highness of Las Vegas. Nobody's higher. Any genre, feel-good sets that keep the party blazing. Booking: ms.hollyweed@gmail.com">
 <meta name="theme-color" content="#050505">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,13 +222,13 @@ footer .mini{color:var(--mid);font-size:13px}
 <header class="hero" id="hero">
   <video class="vid" src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794901221/djhollyweed/booth-loop.mp4"
     poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_0,f_jpg,q_auto/v1794901221/djhollyweed/booth-loop.jpg"
-    autoplay muted loop playsinline aria-label="DJ Holly Weed in the booth"></video>
+    autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="DJ Holly Weed in the booth"></video>
   <div class="tint"></div>
   <div class="dark" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="label kicker">Las Vegas · DJ × Stoned Circus</div>
-    <h1 id="headline">The night is <span class="row2">higher.</span></h1>
-    <p class="sub">Any kind of music, any time — played by a circus performer who spent years holding crowds of thousands. A performance, not just a set.</p>
+    <div class="label kicker">Her Highness · The Stoner Seductress of Las Vegas</div>
+    <h1 id="headline">Nobody&#8217;s <span class="row2">higher.</span></h1>
+    <p class="sub">Your dabbing DJ, ganja goddess and musical Mary Jane — rolling every genre into one fun, feel-good set, passing the vibes to the left, and keeping the party blazing all night.</p>
     <div class="ctas">
       <a class="btn btn-slick" href="#book" data-scroll>Book the Night</a>
       <a class="btn btn-outline" href="#mixes" data-scroll>Hear the Set</a>
@@ -430,6 +430,8 @@ document.getElementById('bookform').addEventListener('submit', function(e){
 
 /* keep the hero video alive through iOS suspensions */
 var heroVid = document.querySelector('.hero .vid');
+var kick = function(){ if (heroVid) { heroVid.muted = true; var pr = heroVid.play(); if (pr) pr.catch(function(){}); } };
+kick(); setTimeout(kick, 600); setTimeout(kick, 2000);
 ['pageshow','focus','visibilitychange','touchstart'].forEach(function(ev){
   (ev==='touchstart'||ev==='visibilitychange' ? document : window).addEventListener(ev, function(){
     if (heroVid && heroVid.paused && !document.hidden) heroVid.play().catch(function(){});
