@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DJ Holly Weed — Las Vegas DJ × Stoned Circus</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DJ Holly Weed — Las Vegas DJ and circus performer. Any genre, any time. Booking: ms.hollyweed@gmail.com">
+<meta name="theme-color" content="#050505">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DJ HOLLY WEED — scroll site, STAGE 1 (static content layer)
+   Stage 2 adds the persistent WebGL canvas behind .content.
+   EDIT COPY, GIG DATES AND LINKS directly in the HTML below —
+   each section is marked with an EDIT comment. Scene code will
+   live in scene.js + config.js and never touches this content.
+   ============================================================ */
+:root{
+  --green:#39FF14; --pink:#FF2FB9; --ink:#050505; --bone:#E8EAF0;
+  --panel:#0A0B0C; --line:#1A1C1F; --border:#2A2D32; --mid:#8A8F98; --body:#9AA0A8;
+  --slick:linear-gradient(90deg,#FF2FB9,#7A5CFF,#00D8FF,#00FF9D,#39FF14,#FFB300);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:'Archivo',sans-serif;overflow-x:hidden}
+::selection{background:var(--green);color:#050505}
+h1,h2,.sdate{font-family:'Anton',sans-serif;letter-spacing:.01em;text-transform:uppercase}
+.label{font-family:'Space Grotesk',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+.hl{color:var(--green)} .pk{color:var(--pink)}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(16px,4vw,44px);background:rgba(5,5,5,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,45,50,.5)}
+nav .wordmark{font-family:'Anton',sans-serif;font-size:17px;letter-spacing:.06em}
+nav .wordmark b{color:var(--green);font-weight:400}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav ul a{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--body)}
+nav ul a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;transition:.25s}
+.btn-slick{background:var(--slick);color:#050505;font-weight:800}
+.btn-slick:hover{filter:brightness(1.15)}
+.btn-outline{border:1px solid var(--border);color:var(--bone)}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+@media(max-width:860px){nav ul{display:none}}
+
+/* content column sits over the (future) canvas */
+.content{position:relative;z-index:2}
+section{position:relative;padding:clamp(80px,12vh,140px) clamp(18px,5vw,64px);max-width:1280px;margin:0 auto}
+.eyebrow{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--green);margin-bottom:18px}
+h2{font-size:clamp(38px,6vw,76px);line-height:.98;margin-bottom:26px}
+p.lede{color:var(--body);font-size:clamp(15.5px,1.4vw,18px);line-height:1.75;max-width:62ch}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:110px;max-width:none}
+.hero .kicker{color:var(--mid);margin-bottom:26px}
+.hero h1{font-size:clamp(52px,9.5vw,150px);line-height:.95}
+.hero h1 .row2{display:block;color:var(--green);text-shadow:0 0 42px rgba(57,255,20,.45)}
+.loopwrap{position:relative;width:min(66vw,420px);margin:34px auto 30px;border-radius:26px;overflow:hidden;
+  border:1px solid rgba(57,255,20,.28);box-shadow:0 0 60px rgba(57,255,20,.22),0 0 140px rgba(255,47,185,.12)}
+.loopwrap video{width:100%;height:auto}
+.hero .sub{color:var(--body);font-size:clamp(15px,1.5vw,18px);max-width:56ch;margin:0 auto 34px;line-height:1.7}
+.hero .ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.scrollcue{margin-top:52px;color:var(--mid);font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.scrollcue span{display:block;font-size:20px;margin-top:8px;color:var(--green)}
+
+/* genre strip */
+.genres{display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:center;padding:26px clamp(18px,5vw,64px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:none}
+.genres span{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--mid)}
+.genres b{color:var(--green);font-weight:400}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,64px);align-items:center}
+.photo-card{border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.photo-card img{width:100%;height:auto}
+.factline{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.factchip{border:1px solid var(--border);border-radius:999px;padding:9px 16px;font-size:12.5px;color:var(--body)}
+.factchip b{color:var(--bone);font-weight:600}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+
+/* MIXES */
+.mixes .embed{border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-top:8px}
+.mixes iframe{display:block;width:100%;height:420px;border:0}
+.mixes .alt{margin-top:18px;color:var(--mid);font-size:13.5px}
+.mixes .alt a{color:var(--green)}
+
+/* GIGS */
+.srow{display:grid;grid-template-columns:150px 1fr auto;gap:22px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.srow:first-of-type{border-top:1px solid var(--line)}
+.sdate{font-size:30px;line-height:1}
+.sdate small{display:block;font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.22em;color:var(--mid);margin-top:7px;text-transform:uppercase}
+.sdate.next{color:var(--pink);text-shadow:0 0 26px rgba(255,47,185,.4)}
+.sname{display:block;font-weight:800;font-size:clamp(17px,2vw,22px);letter-spacing:.02em}
+.svenue{display:block;color:var(--body);font-size:14px;margin-top:6px;line-height:1.6}
+.evlink{color:var(--green);border-bottom:1px solid rgba(57,255,20,.35)}
+.chipb{border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);white-space:nowrap}
+.chipb-solid{border-color:var(--pink);color:var(--pink)}
+@media(max-width:760px){.srow{grid-template-columns:1fr;gap:10px}.chipb{justify-self:start}}
+
+/* GALLERY */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:10px}
+.gal figure{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);aspect-ratio:16/9;background:var(--panel)}
+.gal img{width:100%;height:100%;object-fit:cover}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);background:linear-gradient(transparent,rgba(5,5,5,.82))}
+.gal figure.wide{grid-column:span 2}
+@media(max-width:680px){.gal{grid-template-columns:1fr}.gal figure.wide{grid-column:span 1}}
+
+/* BOOK */
+.book{max-width:1280px}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,72px);align-items:start}
+.book form{display:grid;gap:14px}
+.book label{font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mid)}
+.book input,.book select,.book textarea{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:10px;color:var(--bone);padding:13px 15px;font-family:'Archivo',sans-serif;font-size:15px;margin-top:6px}
+.book input:focus,.book select:focus,.book textarea:focus{outline:none;border-color:var(--green)}
+.book textarea{min-height:120px;resize:vertical}
+.book .direct{margin-top:18px;color:var(--mid);font-size:13.5px;line-height:1.7}
+.book .direct a{color:var(--green)}
+@media(max-width:900px){.book-inner{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:46px clamp(18px,5vw,64px);display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between}
+footer .socials{display:flex;gap:22px}
+footer a{color:var(--body);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+footer a:hover{color:var(--green)}
+footer .mini{color:var(--mid);font-size:12px}
+
+@media(max-width:480px){
+  nav{padding:12px 14px}
+  nav .wordmark{font-size:15px}
+  nav .btn{padding:10px 16px;font-size:12px}
+  footer{justify-content:center;text-align:center;gap:16px}
+  footer .socials{gap:14px;flex-wrap:wrap;justify-content:center}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="#top">DJ HOLLY <b>WEED</b></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#mixes">Mixes</a></li>
+    <li><a href="#gigs">Shows</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="assets/DJHollyWeed-EPK.pdf" download>Press Kit</a></li>
+  </ul>
+  <a class="btn btn-slick" href="#book">Book Now</a>
+</nav>
+
+<!-- SCENE MOUNT (stage 2): persistent full-viewport <canvas> is inserted here, behind .content -->
+
+<main class="content" id="top">
+
+<!-- ======== HERO · EDIT headline / tagline here ======== -->
+<section class="hero" id="hero" data-scene="hero">
+  <div class="label kicker">Las Vegas · DJ × Stoned Circus</div>
+  <h1>The night is <span class="row2">higher.</span></h1>
+  <div class="loopwrap">
+    <video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794899762/djhollyweed/dj-holly-loop.mp4"
+      poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_0,f_jpg,q_auto/v1794899762/djhollyweed/dj-holly-loop.jpg"
+      autoplay muted loop playsinline aria-label="Animated DJ Holly Weed loop"></video>
+  </div>
+  <p class="sub">Any kind of music, any time — played by a circus performer who spent years holding crowds of thousands. A performance, not just a set.</p>
+  <div class="ctas">
+    <a class="btn btn-slick" href="#book">Book the Night</a>
+    <a class="btn btn-outline" href="#mixes">Hear the Set</a>
+  </div>
+  <div class="scrollcue">Scroll<span>↓</span></div>
+</section>
+
+<!-- genre strip · EDIT genres here -->
+<div class="genres" aria-label="Genres">
+  <span>Rap remixes</span><b>·</b><span>Riddim</span><b>·</b><span>Drum &amp; Bass</span><b>·</b><span>Techno</span><b>·</b><span>Hardstyle</span><b>·</b><span>Chillstep</span><b>·</b><span>EDM</span><b>·</b><span>Rock</span><b>·</b><span>Alt</span>
+</div>
+
+<!-- ======== 01 ABOUT · EDIT bio here ======== -->
+<section id="about" data-scene="about">
+  <div class="about-grid">
+    <div>
+      <div class="eyebrow">01 — About</div>
+      <h2>Circus stage,<br><span class="hl">meet the decks.</span></h2>
+      <p class="lede">DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She booked Burning Man before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival, sets during build and tear down with Camp VIP at Burning Man 2026, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
+      <div class="factline">
+        <span class="factchip"><b>Base</b> · Las Vegas, NV — will travel</span>
+        <span class="factchip"><b>Booking</b> · ms.hollyweed@gmail.com</span>
+        <span class="factchip"><b>Socials</b> · @djhollyweed</span>
+      </div>
+    </div>
+    <div class="photo-card">
+      <img src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1400/f_auto/q_auto/djhollyweed/hero-wide" alt="DJ Holly Weed in green smoke" width="2844" height="1600">
+    </div>
+  </div>
+</section>
+
+<!-- ======== 02 MIXES · EDIT mix links here ======== -->
+<section class="mixes" id="mixes" data-scene="mixes">
+  <div class="eyebrow">02 — Mixes</div>
+  <h2>Feel the <span class="pk">frequency.</span></h2>
+  <p class="lede">Live sets and mixes, straight from the booth.</p>
+  <div class="embed">
+    <iframe title="DJ Holly Weed on SoundCloud" loading="lazy" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fdjhollyweed&color=%2339ff14&auto_play=false&hide_related=true&show_comments=false&show_user=true"></iframe>
+  </div>
+  <p class="alt">Prefer an app? <a href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">SoundCloud ↗</a> &nbsp;·&nbsp; <a href="https://instagram.com/djhollyweed" target="_blank" rel="noopener">Instagram ↗</a></p>
+</section>
+
+<!-- ======== 03 SHOWS · EDIT gig dates here ======== -->
+<section id="gigs" data-scene="gigs">
+  <div class="eyebrow">03 — Shows</div>
+  <h2>On the <span class="hl">calendar.</span></h2>
+  <div class="srow">
+    <div class="sdate next">Jan 16<small>2027 · Next Up</small></div>
+    <div><span class="sname">Dystopia</span>
+      <span class="svenue">Regal Rooms · 1204 Regal Row, Austin TX · Dragonwolf Productions · Doors 8 PM &nbsp;·&nbsp; <a class="evlink" href="https://www.regalrooms.com/event-details/dystopia" target="_blank" rel="noopener">Event Info + Tickets ↗</a></span></div>
+    <span class="chipb chipb-solid">Confirmed</span>
+  </div>
+  <div class="srow">
+    <div class="sdate">Nov 13<small>2026 · Played</small></div>
+    <div><span class="sname">PULSE — Opening Set</span>
+      <span class="svenue">Taverna Costera · Las Vegas Arts District · opened the night alongside an incredible DJ lineup</span></div>
+    <span class="chipb">Played</span>
+  </div>
+  <div class="srow">
+    <div class="sdate">2026<small>Played</small></div>
+    <div><span class="sname">Southwest Flow Festival</span>
+      <span class="svenue">Southwest US · three separate one-hour sets — festival debut season</span></div>
+    <span class="chipb">Played</span>
+  </div>
+  <div class="srow">
+    <div class="sdate">2026<small>Played</small></div>
+    <div><span class="sname">Burning Man — Camp VIP</span>
+      <span class="svenue">Black Rock City · Very Inappropriate People · sets during build and tear down</span></div>
+    <span class="chipb">Played</span>
+  </div>
+</section>
+
+<!-- ======== 04 GALLERY (16:9 expanded photos on Cloudinary) ======== -->
+<section id="gallery" data-scene="gallery">
+  <div class="eyebrow">04 — Gallery</div>
+  <h2>Festival <span class="pk">lights.</span></h2>
+  <div class="gal">
+    <figure class="wide"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-11-wide" alt="DJ Holly Weed under a pink light fan, Las Vegas"><figcaption>Las Vegas</figcaption></figure>
+    <figure><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1100/f_auto/q_auto/djhollyweed/live-09-wide" alt="Green-lit set behind the decks"><figcaption>Behind the decks</figcaption></figure>
+    <figure><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1100/f_auto/q_auto/djhollyweed/live-04-wide" alt="Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
+    <figure><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1100/f_auto/q_auto/djhollyweed/live-05-wide" alt="Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
+    <figure><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1100/f_auto/q_auto/djhollyweed/live-02-wide" alt="Art car booth, Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
+    <figure class="wide"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-13-wide" alt="Green-lit set"><figcaption>Festival set</figcaption></figure>
+  </div>
+</section>
+
+<!-- ======== 05 BOOK · the goal of the whole site ======== -->
+<section class="book" id="book" data-scene="book">
+  <div class="eyebrow">05 — Book</div>
+  <h2>Ready to get <span class="hl">higher?</span></h2>
+  <div class="book-inner">
+    <p class="lede">Clubs, festivals, art cars, private and corporate events — based in Las Vegas, happy to travel. Tell us about the night and we'll get right back to you.</p>
+    <form id="bookform">
+      <div><label for="bf-name">Your name</label><input id="bf-name" name="name" required autocomplete="name"></div>
+      <div><label for="bf-email">Email</label><input id="bf-email" name="email" type="email" required autocomplete="email"></div>
+      <div><label for="bf-date">Event date</label><input id="bf-date" name="date" type="date"></div>
+      <div><label for="bf-venue">Venue / city</label><input id="bf-venue" name="venue"></div>
+      <div><label for="bf-type">Event type</label>
+        <select id="bf-type" name="type">
+          <option>Club night</option><option>Festival</option><option>Private event</option><option>Corporate</option><option>Other</option>
+        </select></div>
+      <div><label for="bf-msg">About the event</label><textarea id="bf-msg" name="msg"></textarea></div>
+      <button class="btn btn-slick" type="submit">Send Booking Inquiry</button>
+      <p class="direct">The button opens a pre-filled email from your mail app.<br>Direct line: <a href="mailto:ms.hollyweed@gmail.com">ms.hollyweed@gmail.com</a></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span class="label">DJ Holly Weed · Las Vegas</span>
+  <div class="socials">
+    <a href="https://instagram.com/djhollyweed" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">SoundCloud</a>
+    <a href="https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe" target="_blank" rel="noopener">Spotify</a>
+    <a href="mailto:ms.hollyweed@gmail.com">Booking</a>
+  </div>
+  <span class="mini">Anything you can do, she can do higher.</span>
+</footer>
+
+<script>
+/* Booking form → pre-filled email (content layer, not scene code) */
+document.getElementById('bookform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = this, get = function(id){ return document.getElementById(id).value; };
+  var body = 'Name: ' + get('bf-name') + '\nEmail: ' + get('bf-email') +
+    '\nEvent date: ' + get('bf-date') + '\nVenue / city: ' + get('bf-venue') +
+    '\nEvent type: ' + get('bf-type') + '\n\n' + get('bf-msg');
+  location.href = 'mailto:ms.hollyweed@gmail.com?subject=' +
+    encodeURIComponent('Booking inquiry — DJ Holly Weed') + '&body=' + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
