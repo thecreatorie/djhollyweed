@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>DJ Holly Weed — Las Vegas DJ × Stoned Circus</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="DJ Holly Weed — Her Highness of Las Vegas. Nobody's higher. Any genre, feel-good sets that keep the party blazing. Booking: ms.hollyweed@gmail.com">
+<meta name="description" content="DJ Holly Weed — the Highest Show on Earth. Circus-born Las Vegas DJ setting every genre ablaze. Booking: ms.hollyweed@gmail.com">
 <meta name="theme-color" content="#050505">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +96,7 @@ p.lede{color:var(--body);font-size:clamp(17px,1.6vw,20px);line-height:1.75;max-w
 
 /* about — full-bleed background photo, copy clear of her */
 .about-sec{max-width:none;padding:0}
-.about-stage{position:relative;height:max(min(100svh,56.25vw),540px);display:flex;align-items:center;overflow:hidden}
+.about-stage{position:relative;min-height:max(min(100svh,56.25vw),540px);display:flex;align-items:center;overflow:hidden}
 .about-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_2000/f_auto/q_auto/djhollyweed/about-wide');background-size:cover;background-position:right 45%;transform:scale(1.04);transform-origin:right center;will-change:transform}
 .about-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.94) 0%,rgba(5,5,5,.74) 32%,rgba(5,5,5,.3) 50%,transparent 64%)}
 .about-copy{position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;padding:40px clamp(18px,5vw,64px)}
@@ -110,6 +110,9 @@ p.lede{color:var(--body);font-size:clamp(17px,1.6vw,20px);line-height:1.75;max-w
 .factline{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .factchip{border:1px solid var(--border);border-radius:999px;padding:10px 17px;font-size:14px;color:var(--body);background:rgba(5,5,5,.5)}
 .factchip b{color:var(--bone);font-weight:600}
+.reel{position:relative;width:min(62vw,250px);margin-top:28px;border-radius:18px;overflow:hidden;border:1px solid rgba(57,255,20,.3);box-shadow:0 18px 50px rgba(0,0,0,.5),0 0 40px rgba(57,255,20,.15);cursor:pointer}
+.reel video{width:100%;height:auto;display:block}
+.reel .snd{position:absolute;left:12px;bottom:12px;z-index:2;background:rgba(5,5,5,.72);border:1px solid rgba(57,255,20,.4);border-radius:999px;padding:8px 14px;font-family:'Space Grotesk',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);pointer-events:none}
 @media(max-width:1024px){
   .about-stage{display:block;height:auto}
   .about-bg{position:relative;inset:auto;aspect-ratio:2/3;transform:none;background-image:url('assets/img/hero-smoke.jpg');background-position:center}
@@ -128,6 +131,7 @@ p.lede{color:var(--body);font-size:clamp(17px,1.6vw,20px);line-height:1.75;max-w
 .mlink .t{font-weight:800;font-size:18px;letter-spacing:.03em}
 .mlink .d{display:block;color:var(--mid);font-size:13px;margin-top:5px;font-family:'Space Grotesk',monospace;letter-spacing:.12em;text-transform:uppercase}
 .mlink .ar{color:var(--green);font-size:20px;flex-shrink:0}
+.musiclinks .mlink:last-child:nth-child(odd){grid-column:1/-1}
 @media(max-width:680px){.musiclinks{grid-template-columns:1fr}}
 
 /* shows */
@@ -226,9 +230,9 @@ footer .mini{color:var(--mid);font-size:13px}
   <div class="tint"></div>
   <div class="dark" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="label kicker">Her Highness · The Stoner Seductress of Las Vegas</div>
+    <div class="label kicker">The Highest Show on Earth · Las Vegas</div>
     <h1 id="headline">Nobody&#8217;s <span class="row2">higher.</span></h1>
-    <p class="sub">Your dabbing DJ, ganja goddess and musical Mary Jane — rolling every genre into one fun, feel-good set, passing the vibes to the left, and keeping the party blazing all night.</p>
+    <p class="sub">Smoking hot and high-flying, straight out of the circus — she does it all and sets it all ablaze: fire music, fire performances, every genre burning till sunrise. The party doesn&#8217;t come down until she does.</p>
     <div class="ctas">
       <a class="btn btn-slick" href="#book" data-scroll>Book the Night</a>
       <a class="btn btn-outline" href="#mixes" data-scroll>Hear the Set</a>
@@ -261,7 +265,7 @@ footer .mini{color:var(--mid);font-size:13px}
       <div class="inner">
       <div class="eyebrow rv">About</div>
       <h2><span class="line"><span>Circus stage,</span></span><span class="line"><span class="hl">meet the decks.</span></span></h2>
-      <p class="lede rv">DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She booked Burning Man before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival, sets during build and tear down with Camp VIP at Burning Man 2026, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
+      <p class="lede rv">DJ Holly Weed came to the decks from the circus stage — years performing for crowds of thousands at MGM Grand, EDC's main stage and AREA15, sharing stages with RÜFÜS DU SOL, Marshmello and Desert Dwellers. She said yes to Burningman before she'd played a single set, then delivered: three separate one-hour sets at Southwest Flow Festival, sets during build and tear down with Camp VIP at Burningman 2026, and an opening set at PULSE at Taverna Costera in the Las Vegas Arts District. Expect circus surprises.</p>
       <div class="factline rv">
         <span class="factchip"><b>Base</b> · Las Vegas, NV — will travel</span>
         <span class="factchip"><b>Booking</b> · ms.hollyweed@gmail.com</span>
@@ -292,8 +296,10 @@ footer .mini{color:var(--mid);font-size:13px}
     <h2><span class="line"><span>Feel the</span></span><span class="line"><span class="pk">frequency.</span></span></h2>
     <p class="lede rv">Live sets, mixes and the playlists behind them.</p>
     <div class="musiclinks">
-      <a class="mlink rv" href="https://soundcloud.com/djhollyweed" target="_blank" rel="noopener">
-        <span><span class="t">SoundCloud</span><span class="d">@djhollyweed · live sets &amp; mixes</span></span><span class="ar">↗</span></a>
+      <a class="mlink rv" href="https://open.spotify.com/playlist/4AGsNjSE8zsWVx7k0DiyD0" target="_blank" rel="noopener">
+        <span><span class="t">Trappin</span><span class="d">Spotify playlist · heavy hitters</span></span><span class="ar">↗</span></a>
+      <a class="mlink rv" href="https://open.spotify.com/playlist/6pF4W7HH87VCbhkBRLDFlr" target="_blank" rel="noopener">
+        <span><span class="t">SwanBlend</span><span class="d">Spotify playlist · smooth blends</span></span><span class="ar">↗</span></a>
       <a class="mlink rv" href="https://open.spotify.com/playlist/3jaXhAGGbOeAq72CbvAAY7" target="_blank" rel="noopener">
         <span><span class="t">Flowy EDM</span><span class="d">Spotify playlist · the flow state</span></span><span class="ar">↗</span></a>
       <a class="mlink rv" href="https://open.spotify.com/user/31uorguccftqtg457fz2jyqeoupe" target="_blank" rel="noopener">
@@ -328,7 +334,7 @@ footer .mini{color:var(--mid);font-size:13px}
   </div>
   <div class="srow rv">
     <div class="sdate">2026<small>Played</small></div>
-    <div><span class="sname">Burning Man — Camp VIP</span>
+    <div><span class="sname">Burningman — Camp VIP</span>
       <span class="svenue">Black Rock City · Very Inappropriate People · sets during build and tear down</span></div>
     <span class="chipb">Played</span>
   </div>
@@ -346,9 +352,12 @@ footer .mini{color:var(--mid);font-size:13px}
       <figure class="gcard"><video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/flow-hoop.mp4" poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_1,f_jpg,q_auto/djhollyweed/flow-hoop.jpg" autoplay muted loop playsinline aria-label="LED hoop performance at PULSE"></video><figcaption>LED hoop · PULSE at Taverna Costera</figcaption></figure>
       <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-09-wide" alt="Green-lit set behind the decks"><figcaption>Behind the decks</figcaption></figure>
       <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/pulse-02-wide" alt="On the decks at PULSE, Taverna Costera"><figcaption>PULSE · Taverna Costera</figcaption></figure>
-      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-04-wide" alt="Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
+      <figure class="gcard"><video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/swff-smoke.mp4" poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_1,f_jpg,q_auto/djhollyweed/swff-smoke.jpg" autoplay muted loop playsinline aria-label="Lighting up behind the decks at Southwest Flow Festival"></video><figcaption>Sparking the set · Southwest Flow</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/swff-26-wide" alt="Art car booth, Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
       <figure class="gcard"><video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/flow-batons.mp4" poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_1,f_jpg,q_auto/djhollyweed/flow-batons.jpg" autoplay muted loop playsinline aria-label="LED flow performance in slow motion"></video><figcaption>LED flow · slow motion</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/swff-31-wide" alt="DJ Holly Weed on the decks at Southwest Flow Festival"><figcaption>Southwest Flow Festival</figcaption></figure>
       <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/live-13-wide" alt="Green-lit festival set"><figcaption>Festival set</figcaption></figure>
+      <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/swff-light-wide" alt="Lighting up at the decks, Southwest Flow Festival"><figcaption>Lit · Southwest Flow</figcaption></figure>
       <figure class="gcard"><img loading="lazy" src="https://res.cloudinary.com/mdmdesignstudio/image/upload/c_limit,w_1600/f_auto/q_auto/djhollyweed/pulse-03-wide" alt="Red-lit booth at PULSE, Taverna Costera"><figcaption>PULSE · Taverna Costera</figcaption></figure>
     </div>
   </div>
@@ -363,6 +372,12 @@ footer .mini{color:var(--mid);font-size:13px}
     <div class="book-grid">
       <div>
         <p class="lede rv">The greatest show after dark. Clubs, festivals, art cars, private and corporate events — based in Las Vegas, happy to run away with your circus. Tell us about the night and we'll get right back to you.</p>
+      <div class="reel rv" id="whyreel" role="button" aria-label="Play with sound: what made her want to be a DJ" tabindex="0">
+        <video src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/djhollyweed/why-dj.mp4"
+          poster="https://res.cloudinary.com/mdmdesignstudio/video/upload/so_0,f_jpg,q_auto/djhollyweed/why-dj.jpg"
+          autoplay muted loop playsinline></video>
+        <span class="snd" id="whysnd">🔊 Tap for sound</span>
+      </div>
         <video class="chibi rv" src="https://res.cloudinary.com/mdmdesignstudio/video/upload/q_auto/v1794899762/djhollyweed/dj-holly-loop.mp4" autoplay muted loop playsinline aria-label="Animated DJ Holly Weed"></video>
       </div>
       <form id="bookform" class="rv">
@@ -427,6 +442,21 @@ document.getElementById('bookform').addEventListener('submit', function(e){
   location.href = 'mailto:ms.hollyweed@gmail.com?subject=' +
     encodeURIComponent('Booking inquiry — DJ Holly Weed') + '&body=' + encodeURIComponent(body);
 });
+
+/* About interview reel: tap to toggle sound */
+(function(){
+  var r = document.getElementById('whyreel');
+  if (r) {
+    var v = r.querySelector('video'), tag = document.getElementById('whysnd');
+    var toggle = function(){
+      v.muted = !v.muted;
+      if (!v.muted) { v.currentTime = 0; v.play().catch(function(){}); }
+      tag.textContent = v.muted ? '\ud83d\udd0a Tap for sound' : '\ud83d\udd07 Mute';
+    };
+    r.addEventListener('click', toggle);
+    r.addEventListener('keydown', function(e){ if (e.key==='Enter'||e.key===' ') { e.preventDefault(); toggle(); } });
+  }
+})();
 
 /* keep the hero video alive through iOS suspensions */
 var heroVid = document.querySelector('.hero .vid');
